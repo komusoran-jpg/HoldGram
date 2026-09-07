@@ -7,7 +7,6 @@ import com.radolyn.ayugram.messages.AyuSavePreferences;
 import org.telegram.messenger.FileLoader;
 import org.telegram.messenger.MessageObject;
 import org.telegram.messenger.MessagesController;
-import org.telegram.tgnet.NativeByteBuffer;
 import org.telegram.tgnet.TLRPC;
 import java.io.File;
 import java.util.ArrayList;
@@ -49,14 +48,14 @@ public class AyuMessageUtils {
 
         if (message.entities != null && !message.entities.isEmpty()) {
             try {
-                NativeByteBuffer byteBuffer = new NativeByteBuffer(message.entities.size() * 32 + 32);
-                byteBuffer.writeInt32(0x1cb5c415); // vector magic
-                byteBuffer.writeInt32(message.entities.size());
+                org.telegram.tgnet.SerializedData data = new org.telegram.tgnet.SerializedData(message.entities.size() * 32 + 32);
+                data.writeInt32(0x1cb5c415); // vector magic
+                data.writeInt32(message.entities.size());
                 for (int i = 0; i < message.entities.size(); i++) {
-                    message.entities.get(i).serializeToStream(byteBuffer);
+                    message.entities.get(i).serializeToStream(data);
                 }
-                msg.textEntities = byteBuffer.toByteArray();
-                byteBuffer.reuse();
+                msg.textEntities = data.toByteArray();
+                data.cleanup();
             } catch (Throwable ignored) {}
         }
     }
@@ -128,19 +127,17 @@ public class AyuMessageUtils {
 
         if (base.textEntities != null && base.textEntities.length > 0) {
             try {
-                NativeByteBuffer byteBuffer = new NativeByteBuffer(base.textEntities.length);
-                byteBuffer.writeBytes(base.textEntities);
-                byteBuffer.position(0);
-                int magic = byteBuffer.readInt32(false);
-                int count = byteBuffer.readInt32(false);
+                org.telegram.tgnet.SerializedData data = new org.telegram.tgnet.SerializedData(base.textEntities);
+                int magic = data.readInt32(false);
+                int count = data.readInt32(false);
                 message.entities = new ArrayList<>(count);
                 for (int i = 0; i < count; i++) {
-                    TLRPC.MessageEntity entity = TLRPC.MessageEntity.TLdeserialize(byteBuffer, byteBuffer.readInt32(false), false);
+                    TLRPC.MessageEntity entity = TLRPC.MessageEntity.TLdeserialize(data, data.readInt32(false), false);
                     if (entity != null) {
                         message.entities.add(entity);
                     }
                 }
-                byteBuffer.reuse();
+                data.cleanup();
             } catch (Throwable ignored) {}
         }
     }
