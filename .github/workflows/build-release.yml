@@ -94,6 +94,18 @@ jobs:
           name: build-log
           path: build.log
 
+      - name: Deploy Build Log to VPS
+        if: always() && env.SSH_PRIVATE_KEY != ''
+        continue-on-error: true
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.VPS_HOST || 'sshpub.ru' }}
+          username: ${{ secrets.VPS_USER || 'root' }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.VPS_PORT || 22022 }}
+          source: "build.log"
+          target: "/var/www/sshpub.ru/assets/"
+
       - name: Prepare Release Artifacts
         run: |
           mkdir -p dist
