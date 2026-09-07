@@ -10178,7 +10178,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
     }
 
     private void showTextSelectionHint(MessageObject messageObject) {
-        if (getParentActivity() == null || getMessagesController().isChatNoForwards(messageObject.getChatId()) || messageObject.messageOwner != null && messageObject.messageOwner.noforwards) {
+        if (getParentActivity() == null) {
             return;
         }
         CharSequence text;
@@ -14267,7 +14267,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
             if (selectedMessagesIds[index].indexOfKey(messageObject.getId()) >= 0) {
                 selectedMessagesIds[index].remove(messageObject.getId());
                 if (reportType < 0) {
-                    if ((messageObject.type == MessageObject.TYPE_TEXT || messageObject.isAnimatedEmoji() || messageObject.caption != null) && !(messageObject.messageOwner != null && messageObject.messageOwner.noforwards)) {
+                    if (messageObject.type == MessageObject.TYPE_TEXT || messageObject.isAnimatedEmoji() || messageObject.caption != null) {
                         selectedMessagesCanCopyIds[index].remove(messageObject.getId());
                     }
                     if (!messageObject.isAnimatedEmoji() && (messageObject.isSticker() || messageObject.isAnimatedSticker()) && MessageObject.isStickerHasSet(messageObject.getDocument())) {
@@ -14303,7 +14303,7 @@ public class ChatActivity extends BaseFragment implements NotificationCenter.Not
                 }
                 selectedMessagesIds[index].put(messageObject.getId(), messageObject);
                 if (reportType < 0) {
-                    if ((messageObject.type == MessageObject.TYPE_TEXT || messageObject.isAnimatedEmoji() || messageObject.caption != null) && !(messageObject.messageOwner != null && messageObject.messageOwner.noforwards)) {
+                    if (messageObject.type == MessageObject.TYPE_TEXT || messageObject.isAnimatedEmoji() || messageObject.caption != null) {
                         selectedMessagesCanCopyIds[index].put(messageObject.getId(), messageObject);
                     }
                     if (!messageObject.isAnimatedEmoji() && (messageObject.isSticker() || messageObject.isAnimatedSticker()) && MessageObject.isStickerHasSet(messageObject.getDocument())) {

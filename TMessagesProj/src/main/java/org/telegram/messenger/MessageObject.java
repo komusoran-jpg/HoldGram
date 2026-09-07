@@ -5311,8 +5311,6 @@ public class MessageObject {
             return false;
         } else if (eventId != 0) {
             return false;
-        } else if (messageOwner.noforwards) {
-            return false;
         } else if (messageOwner.fwd_from != null && !isOutOwner() && messageOwner.fwd_from.saved_from_peer != null && getDialogId() == UserConfig.getInstance(currentAccount).getClientUserId()) {
             return true;
         } else if (type == TYPE_STICKER || type == TYPE_ANIMATED_STICKER || type == TYPE_EMOJIS) {
@@ -7110,7 +7108,7 @@ public class MessageObject {
     }
 
     public boolean canForwardMessage() {
-        return !(messageOwner instanceof TLRPC.TL_message_secret) && !needDrawBluredPreview() && !isLiveLocation() && type != MessageObject.TYPE_PHONE_CALL && !isSponsored() && !messageOwner.noforwards;
+        return !(messageOwner instanceof TLRPC.TL_message_secret) && !needDrawBluredPreview() && !isLiveLocation() && type != MessageObject.TYPE_PHONE_CALL && !isSponsored();
     }
 
     public boolean canEditMedia() {

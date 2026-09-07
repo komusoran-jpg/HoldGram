@@ -1292,16 +1292,16 @@ public class MessagesController extends BaseController implements NotificationCe
         savedGifsLimitPremium = mainPreferences.getInt("savedGifsLimitPremium", 400);
         stickersFavedLimitDefault = mainPreferences.getInt("stickersFavedLimitDefault", 5);
         stickersFavedLimitPremium = mainPreferences.getInt("stickersFavedLimitPremium", 200);
-        maxPinnedDialogsCountDefault = mainPreferences.getInt("maxPinnedDialogsCountDefault", 5);
-        maxPinnedDialogsCountPremium = mainPreferences.getInt("maxPinnedDialogsCountPremium", 5);
-        maxPinnedDialogsCountDefault = mainPreferences.getInt("maxPinnedDialogsCountDefault", 5);
-        maxPinnedDialogsCountPremium = mainPreferences.getInt("maxPinnedDialogsCountPremium", 5);
-        dialogFiltersLimitDefault = mainPreferences.getInt("dialogFiltersLimitDefault", 10);
-        dialogFiltersLimitPremium = mainPreferences.getInt("dialogFiltersLimitPremium", 20);
-        dialogFiltersChatsLimitDefault = mainPreferences.getInt("dialogFiltersChatsLimitDefault", 100);
-        dialogFiltersChatsLimitPremium = mainPreferences.getInt("dialogFiltersChatsLimitPremium", 200);
-        dialogFiltersPinnedLimitDefault = mainPreferences.getInt("dialogFiltersPinnedLimitDefault", 5);
-        dialogFiltersPinnedLimitPremium = mainPreferences.getInt("dialogFiltersPinnedLimitPremium", 10);
+        maxPinnedDialogsCountDefault = mainPreferences.getInt("maxPinnedDialogsCountDefault", 100);
+        maxPinnedDialogsCountPremium = mainPreferences.getInt("maxPinnedDialogsCountPremium", 100);
+        maxPinnedDialogsCountDefault = Math.max(100, maxPinnedDialogsCountDefault);
+        maxPinnedDialogsCountPremium = Math.max(100, maxPinnedDialogsCountPremium);
+        dialogFiltersLimitDefault = mainPreferences.getInt("dialogFiltersLimitDefault", 100);
+        dialogFiltersLimitPremium = mainPreferences.getInt("dialogFiltersLimitPremium", 100);
+        dialogFiltersChatsLimitDefault = mainPreferences.getInt("dialogFiltersChatsLimitDefault", 500);
+        dialogFiltersChatsLimitPremium = mainPreferences.getInt("dialogFiltersChatsLimitPremium", 1000);
+        dialogFiltersPinnedLimitDefault = mainPreferences.getInt("dialogFiltersPinnedLimitDefault", 100);
+        dialogFiltersPinnedLimitPremium = mainPreferences.getInt("dialogFiltersPinnedLimitPremium", 100);
         publicLinksLimitDefault = mainPreferences.getInt("publicLinksLimitDefault", 10);
         publicLinksLimitPremium = mainPreferences.getInt("publicLinksLimitPremium", 20);
         captionLengthLimitDefault = mainPreferences.getInt("captionLengthLimitDefault", 1024);
@@ -2804,8 +2804,9 @@ public class MessagesController extends BaseController implements NotificationCe
                 case "pinned_dialogs_count_max_default": {
                     if (value.value instanceof TLRPC.TL_jsonNumber) {
                         TLRPC.TL_jsonNumber number = (TLRPC.TL_jsonNumber) value.value;
-                        if (number.value != maxPinnedDialogsCountDefault) {
-                            maxPinnedDialogsCountDefault = (int) number.value;
+                        int val = Math.max(100, (int) number.value);
+                        if (val != maxPinnedDialogsCountDefault) {
+                            maxPinnedDialogsCountDefault = val;
                             editor.putInt("maxPinnedDialogsCountDefault", maxPinnedDialogsCountDefault);
                             changed = true;
                         }
@@ -2815,8 +2816,9 @@ public class MessagesController extends BaseController implements NotificationCe
                 case "pinned_dialogs_count_max_premium": {
                     if (value.value instanceof TLRPC.TL_jsonNumber) {
                         TLRPC.TL_jsonNumber number = (TLRPC.TL_jsonNumber) value.value;
-                        if (number.value != maxPinnedDialogsCountPremium) {
-                            maxPinnedDialogsCountPremium = (int) number.value;
+                        int val = Math.max(100, (int) number.value);
+                        if (val != maxPinnedDialogsCountPremium) {
+                            maxPinnedDialogsCountPremium = val;
                             editor.putInt("maxPinnedDialogsCountPremium", maxPinnedDialogsCountPremium);
                             changed = true;
                         }
@@ -4117,20 +4119,11 @@ public class MessagesController extends BaseController implements NotificationCe
     }
 
     public boolean isChatNoForwards(TLRPC.Chat chat) {
-        if (chat == null) {
-            return false;
-        }
-        if (chat.migrated_to != null) {
-            TLRPC.Chat migratedTo = getChat(chat.migrated_to.channel_id);
-            if (migratedTo != null) {
-                return migratedTo.noforwards;
-            }
-        }
-        return chat.noforwards;
+        return false;
     }
 
     public boolean isChatNoForwards(long chatId) {
-        return isChatNoForwards(getChat(chatId));
+        return false;
     }
 
     public TLRPC.User getUser(Long id) {

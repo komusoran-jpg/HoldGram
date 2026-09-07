@@ -523,13 +523,9 @@ public class TranslateAlert2 extends BottomSheet implements NotificationCenter.N
 
     public void setNoforwards(boolean noforwards) {
         if (textView != null) {
-            textView.setTextIsSelectable(!noforwards);
+            textView.setTextIsSelectable(true);
         }
-        if (noforwards) {
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
-        } else {
-            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_SECURE);
-        }
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_SECURE);
     }
 
     @Override

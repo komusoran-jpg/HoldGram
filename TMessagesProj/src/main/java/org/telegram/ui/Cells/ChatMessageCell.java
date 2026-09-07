@@ -3245,7 +3245,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
 
     private boolean checkTextSelection(MotionEvent event) {
         TextSelectionHelper.ChatListTextSelectionHelper textSelectionHelper = delegate.getTextSelectionHelper();
-        if (textSelectionHelper == null || MessagesController.getInstance(currentAccount).isChatNoForwards(currentMessageObject.getChatId()) || (currentMessageObject.messageOwner != null && currentMessageObject.messageOwner.noforwards)) {
+        if (textSelectionHelper == null) {
             return false;
         }
         boolean hasTextBlocks = currentMessageObject.textLayoutBlocks != null && !currentMessageObject.textLayoutBlocks.isEmpty();
@@ -4281,9 +4281,7 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
             drawVideoSize = false;
             canStreamVideo = false;
             animatingNoSound = 0;
-            if (MessagesController.getInstance(currentAccount).isChatNoForwards(messageObject.getChatId()) || (messageObject.messageOwner != null && messageObject.messageOwner.noforwards)) {
-                drawSideButton = 0;
-            } else {
+            {
                 drawSideButton = !isRepliesChat && checkNeedDrawShareButton(messageObject) && (currentPosition == null || currentPosition.last) ? 1 : 0;
                 if (isPinnedChat || drawSideButton == 1 && messageObject.messageOwner.fwd_from != null && !messageObject.isOutOwner() && messageObject.messageOwner.fwd_from.saved_from_peer != null && messageObject.getDialogId() == UserConfig.getInstance(currentAccount).getClientUserId()) {
                     drawSideButton = 2;

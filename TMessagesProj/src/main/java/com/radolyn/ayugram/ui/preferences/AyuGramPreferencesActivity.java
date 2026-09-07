@@ -509,7 +509,7 @@ public class AyuGramPreferencesActivity extends BasePreferencesActivity implemen
 
     @Override
     protected String getTitle() {
-        return "HoldGram";
+        return "HoldGram Hub";
     }
 
     @Override
@@ -569,19 +569,19 @@ public class AyuGramPreferencesActivity extends BasePreferencesActivity implemen
                 case 3:
                     HeaderCell headerCell = (HeaderCell) holder.itemView;
                     if (position == ghostEssentialsHeaderRow) {
-                        headerCell.setText(LocaleController.getString(R.string.GhostEssentialsHeader));
+                        headerCell.setText("👻  " + LocaleController.getString(R.string.GhostEssentialsHeader));
                     } else if (position == spyHeaderRow) {
-                        headerCell.setText(LocaleController.getString(R.string.SpyEssentialsHeader));
+                        headerCell.setText("🛡️  " + LocaleController.getString(R.string.SpyEssentialsHeader));
                     } else if (position == qolHeaderRow) {
-                        headerCell.setText(LocaleController.getString(R.string.QoLTogglesHeader));
+                        headerCell.setText("⚡  " + LocaleController.getString(R.string.QoLTogglesHeader));
                     } else if (position == customizationHeaderRow) {
-                        headerCell.setText(LocaleController.getString(R.string.CustomizationHeader));
+                        headerCell.setText("🎨  " + LocaleController.getString(R.string.CustomizationHeader));
                     } else if (position == badgesHeaderRow) {
-                        headerCell.setText(LocaleController.getString("HoldGramBadgesTitle", R.string.HoldGramBadgesTitle));
+                        headerCell.setText("👑  " + LocaleController.getString("HoldGramBadgesTitle", R.string.HoldGramBadgesTitle));
                     } else if (position == sessionHeaderRow) {
-                        headerCell.setText(LocaleController.getString("HoldGramSessionTitle", R.string.HoldGramSessionTitle));
+                        headerCell.setText("🔑  " + LocaleController.getString("HoldGramSessionTitle", R.string.HoldGramSessionTitle));
                     } else if (position == debugHeaderRow) {
-                        headerCell.setText(LocaleController.getString("SettingsDebug", R.string.SettingsDebug));
+                        headerCell.setText("⚙️  " + LocaleController.getString("SettingsDebug", R.string.SettingsDebug));
                     }
                     break;
                 case 5:

@@ -147,6 +147,16 @@ public class DrawerProfileCell extends FrameLayout implements NotificationCenter
         phoneTextView.setMaxLines(1);
         phoneTextView.setSingleLine(true);
         phoneTextView.setGravity(Gravity.LEFT);
+        phoneTextView.setOnLongClickListener(v -> {
+            if (lastUser != null) {
+                AndroidUtilities.addToClipboard(String.valueOf(lastUser.id));
+                try {
+                    org.telegram.ui.Components.BulletinFactory.global().createCopyBulletin(LocaleController.getString("TextCopied", R.string.TextCopied)).show();
+                } catch (Exception ignore) {}
+                return true;
+            }
+            return false;
+        });
         addView(phoneTextView, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT, Gravity.LEFT | Gravity.BOTTOM, 16, 0, 52, 9));
 
         arrowView = new ImageView(context);
@@ -683,13 +693,16 @@ public class DrawerProfileCell extends FrameLayout implements NotificationCenter
         }
         animatedStatus.setColor(Theme.getColor(Theme.isCurrentThemeDark() ? Theme.key_chats_verifiedBackground : Theme.key_chats_menuPhoneCats));
         status.setColor(Theme.getColor(Theme.isCurrentThemeDark() ? Theme.key_chats_verifiedBackground : Theme.key_chats_menuPhoneCats));
-        if (!ExteraConfig.hidePhoneNumber) {
-            phoneTextView.setText(PhoneFormat.getInstance().format("+" + user.phone));
+        StringBuilder info = new StringBuilder();
+        if (!ExteraConfig.hidePhoneNumber && !TextUtils.isEmpty(user.phone)) {
+            info.append(PhoneFormat.getInstance().format("+" + user.phone));
         } else if (!TextUtils.isEmpty(UserObject.getPublicUsername(user))) {
-            phoneTextView.setText("@" + UserObject.getPublicUsername(user));
+            info.append("@").append(UserObject.getPublicUsername(user));
         } else {
-            phoneTextView.setText(LocaleController.getString("MobileHidden",R.string.MobileHidden));
+            info.append(LocaleController.getString("MobileHidden", R.string.MobileHidden));
         }
+        info.append("  •  ID: ").append(user.id);
+        phoneTextView.setText(info.toString());
         AvatarDrawable avatarDrawable = new AvatarDrawable(user);
         avatarDrawable.setColor(Theme.getColor(Theme.key_avatar_backgroundInProfileBlue));
         avatarImageView.setForUserOrChat(user, avatarDrawable);
@@ -701,7 +714,21 @@ public class DrawerProfileCell extends FrameLayout implements NotificationCenter
         Integer currentTag = (Integer) getTag();
         int backgroundKey = Theme.hasThemeKey(Theme.key_chats_menuTopBackground) && Theme.getColor(Theme.key_chats_menuTopBackground) != 0 ? Theme.key_chats_menuTopBackground : Theme.key_chats_menuTopBackgroundCats;
         if (force || currentTag == null || backgroundKey != currentTag) {
-            setBackgroundColor(Theme.getColor(backgroundKey));
+            if (Theme.isCurrentThemeDark()) {
+                GradientDrawable gradient = new GradientDrawable(
+                    GradientDrawable.Orientation.TOP_BOTTOM,
+                    new int[]{0xFF0E1622, 0xFF142031}
+                );
+                setBackground(gradient);
+            } else {
+                int color1 = Theme.getColor(backgroundKey);
+                int color2 = AndroidUtilities.getOffsetColor(color1, 0xFF1A3B5C, 0.15f, 1.0f);
+                GradientDrawable gradient = new GradientDrawable(
+                    GradientDrawable.Orientation.TOP_BOTTOM,
+                    new int[]{color1, color2}
+                );
+                setBackground(gradient);
+            }
             setTag(backgroundKey);
         }
         return backgroundKey;
