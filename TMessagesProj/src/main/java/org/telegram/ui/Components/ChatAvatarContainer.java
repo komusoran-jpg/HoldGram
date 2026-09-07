@@ -610,8 +610,14 @@ public class ChatAvatarContainer extends FrameLayout implements NotificationCent
             } else if (emojiStatus instanceof TLRPC.TL_emojiStatusUntil && ((TLRPC.TL_emojiStatusUntil) emojiStatus).until > (int) (System.currentTimeMillis() / 1000)) {
                 emojiStatusDrawable.set(((TLRPC.TL_emojiStatusUntil) emojiStatus).document_id, animated);
             } else if (arrow) {
-                Drawable drawable = ContextCompat.getDrawable(ApplicationLoader.applicationContext, R.drawable.ic_status_arrow).mutate();
-                drawable.setColorFilter(new PorterDuffColorFilter(getThemedColor(Theme.key_profile_verifiedBackground), PorterDuff.Mode.MULTIPLY));
+                Drawable drawable = null;
+                if (parentFragment != null && parentFragment.getCurrentUser() != null) {
+                    drawable = HoldGramBadges.getBadgeDrawableForUser(parentFragment.getCurrentUser(), currentAccount, null);
+                }
+                if (drawable == null) {
+                    drawable = ContextCompat.getDrawable(ApplicationLoader.applicationContext, R.drawable.ic_status_arrow).mutate();
+                    drawable.setColorFilter(new PorterDuffColorFilter(getThemedColor(Theme.key_profile_verifiedBackground), PorterDuff.Mode.MULTIPLY));
+                }
                 emojiStatusDrawable.set(drawable, animated);
             } else {
                 Drawable drawable = ContextCompat.getDrawable(ApplicationLoader.applicationContext, R.drawable.msg_premium_liststar).mutate();
@@ -624,8 +630,14 @@ public class ChatAvatarContainer extends FrameLayout implements NotificationCent
             rightDrawableIsScamOrVerified = true;
             rightDrawableContentDescription = LocaleController.getString("AccDescrPremium", R.string.AccDescrPremium);
         } else if (arrow) {
-            Drawable drawable = ContextCompat.getDrawable(ApplicationLoader.applicationContext, R.drawable.ic_status_arrow).mutate();
-            drawable.setColorFilter(new PorterDuffColorFilter(getThemedColor(Theme.key_profile_verifiedBackground), PorterDuff.Mode.MULTIPLY));
+            Drawable drawable = null;
+            if (parentFragment != null && parentFragment.getCurrentUser() != null) {
+                drawable = HoldGramBadges.getBadgeDrawableForUser(parentFragment.getCurrentUser(), currentAccount, null);
+            }
+            if (drawable == null) {
+                drawable = ContextCompat.getDrawable(ApplicationLoader.applicationContext, R.drawable.ic_status_arrow).mutate();
+                drawable.setColorFilter(new PorterDuffColorFilter(getThemedColor(Theme.key_profile_verifiedBackground), PorterDuff.Mode.MULTIPLY));
+            }
             titleTextView.setRightDrawable(drawable);
             titleTextView.setRightDrawableTopPadding(-AndroidUtilities.dp(0.5f));
             rightDrawableIsScamOrVerified = true;

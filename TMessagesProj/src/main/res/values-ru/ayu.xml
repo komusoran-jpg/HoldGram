@@ -102,5 +102,15 @@
   <string name="SettingsDescription">HoldGram — приватный нативный клиент Telegram.</string>
   <string name="SecretMessageTecno">Телефоны от Tecno - лучшие.</string>
   <string name="SecretMessageXiaomiSuccess">У тебя хороший телефон.</string>
-  <string name="SecretMessageXiaomiFailure">Установи кастомную прошивку.</string>
+  <string name="HoldGramBadgesTitle">Кастомные бейджи</string>
+  <string name="HoldGramSelfBadge">Бейдж своего аккаунта</string>
+  <string name="HoldGramSessionTitle">Импорт аккаунтов и сессий</string>
+  <string name="HoldGramImportFile">Импорт файла (.session, .json, tdata.zip)</string>
+  <string name="HoldGramImportString">Вставить StringSession или JSON</string>
+  <string name="HoldGramImportSuccess">Сессия успешно импортирована!</string>
+  <string name="HoldGramImportDialogTitle">Импорт сессии</string>
+  <string name="HoldGramImportDialogPrompt">Вставьте строку сессии (Telethon / Pyrogram StringSession или JSON):</string>
+  <string name="HoldGramBadgeUpdated">Бейдж обновлен</string>
+  <string name="HoldGramImportSession">Войти по сессии (TData, .session, JSON)</string>
+  <string name="HoldGramSessionError">Ошибка при импорте сессии. Проверьте валидность файла или ключа.</string>
 </resources>

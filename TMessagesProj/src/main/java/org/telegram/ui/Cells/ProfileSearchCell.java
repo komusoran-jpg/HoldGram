@@ -573,7 +573,9 @@ public class ProfileSearchCell extends BaseCell implements NotificationCenter.No
             statusDrawable.set(((TLRPC.TL_emojiStatus) user.emoji_status).document_id, animated);
             statusDrawable.setColor(Theme.getColor(Theme.key_chats_verifiedBackground, resourcesProvider));
         } else if (arrow) {
-            statusDrawable.set(Theme.dialogs_exteraArrowDrawable, animated);
+            Drawable badge = HoldGramBadges.getBadgeDrawableForUser(user, currentAccount, resourcesProvider);
+            if (badge == null) badge = Theme.dialogs_exteraArrowDrawable;
+            statusDrawable.set(badge, animated);
             statusDrawable.setColor(Theme.getColor(Theme.key_chats_verifiedBackground, resourcesProvider));
         } else if (user != null && !savedMessages && MessagesController.getInstance(currentAccount).isPremiumUser(user)) {
             statusDrawable.set(PremiumGradient.getInstance().premiumStarDrawableMini, animated);

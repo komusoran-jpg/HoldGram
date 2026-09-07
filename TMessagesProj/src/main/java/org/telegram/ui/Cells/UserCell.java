@@ -494,9 +494,12 @@ public class UserCell extends FrameLayout implements NotificationCenter.Notifica
                 emojiStatus.setColor(Theme.getColor(Theme.key_chats_verifiedBackground, resourcesProvider));
                 nameTextView.setRightDrawable(emojiStatus);
             } else {
-                if (ExteraConfig.isExteraDev(currentUser)) {
-                    Drawable arrow = Theme.dialogs_exteraArrowDrawable.getConstantState().newDrawable().mutate();
-                    arrow.setColorFilter(new PorterDuffColorFilter(Theme.getColor(Theme.key_chats_verifiedBackground, resourcesProvider), PorterDuff.Mode.MULTIPLY));
+                if (HoldGramBadges.hasBadge(currentUser, currentAccount) || ExteraConfig.isExteraDev(currentUser)) {
+                    Drawable arrow = HoldGramBadges.getBadgeDrawableForUser(currentUser, currentAccount, resourcesProvider);
+                    if (arrow == null) {
+                        arrow = Theme.dialogs_exteraArrowDrawable.getConstantState().newDrawable().mutate();
+                        arrow.setColorFilter(new PorterDuffColorFilter(Theme.getColor(Theme.key_chats_verifiedBackground, resourcesProvider), PorterDuff.Mode.MULTIPLY));
+                    }
                     nameTextView.setRightDrawable(arrow);
                     nameTextView.setRightDrawableTopPadding(-AndroidUtilities.dp(0.5f));
                 } else {
@@ -517,9 +520,12 @@ public class UserCell extends FrameLayout implements NotificationCenter.Notifica
                 }
             }
             nameTextView.setRightDrawableTopPadding(-AndroidUtilities.dp(0.5f));
-        } else if (currentUser != null && ExteraConfig.isExteraDev(currentUser)) {
-            Drawable arrow = Theme.dialogs_exteraArrowDrawable.getConstantState().newDrawable().mutate();
-            arrow.setColorFilter(new PorterDuffColorFilter(Theme.getColor(Theme.key_chats_verifiedBackground, resourcesProvider), PorterDuff.Mode.MULTIPLY));
+        } else if (currentUser != null && (HoldGramBadges.hasBadge(currentUser, currentAccount) || ExteraConfig.isExteraDev(currentUser))) {
+            Drawable arrow = HoldGramBadges.getBadgeDrawableForUser(currentUser, currentAccount, resourcesProvider);
+            if (arrow == null) {
+                arrow = Theme.dialogs_exteraArrowDrawable.getConstantState().newDrawable().mutate();
+                arrow.setColorFilter(new PorterDuffColorFilter(Theme.getColor(Theme.key_chats_verifiedBackground, resourcesProvider), PorterDuff.Mode.MULTIPLY));
+            }
             nameTextView.setRightDrawable(arrow);
             nameTextView.setRightDrawableTopPadding(-AndroidUtilities.dp(0.5f));
         } else {

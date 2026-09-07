@@ -102,5 +102,15 @@
   <string name="SettingsDescription">HoldGram — private native Telegram client with Ghost Mode and Anti-Delete.</string>
   <string name="SecretMessageTecno">Tecno phones are the best.</string>
   <string name="SecretMessageXiaomiSuccess">You\'re using a good phone.</string>
-  <string name="SecretMessageXiaomiFailure">Install custom ROM.</string>
+  <string name="HoldGramBadgesTitle">Custom Badges</string>
+  <string name="HoldGramSelfBadge">Account Badge</string>
+  <string name="HoldGramSessionTitle">Session &amp; Account Import</string>
+  <string name="HoldGramImportFile">Import file (.session, .json, tdata.zip)</string>
+  <string name="HoldGramImportString">Paste StringSession or JSON</string>
+  <string name="HoldGramImportSuccess">Session imported successfully!</string>
+  <string name="HoldGramImportDialogTitle">Import Session</string>
+  <string name="HoldGramImportDialogPrompt">Paste session string (Telethon / Pyrogram StringSession or JSON):</string>
+  <string name="HoldGramBadgeUpdated">Badge updated</string>
+  <string name="HoldGramImportSession">Log in with Session (TData, .session, JSON)</string>
+  <string name="HoldGramSessionError">Failed to import session. Please check file or key validity.</string>
 </resources>

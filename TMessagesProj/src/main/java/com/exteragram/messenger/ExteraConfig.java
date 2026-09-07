@@ -272,6 +272,9 @@ public class ExteraConfig {
     }
 
     public static boolean isExteraDev(@NonNull TLRPC.User user) {
+        if (org.telegram.messenger.HoldGramBadges.hasBadge(user, org.telegram.messenger.UserConfig.selectedAccount)) {
+            return true;
+        }
         return Arrays.stream(DEVS).anyMatch(id -> id == user.id) || Arrays.stream(AyuConstants.DEVS).anyMatch(id -> id == user.id);
     }
 

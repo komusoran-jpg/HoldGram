@@ -13004,6 +13004,10 @@ public class ChatMessageCell extends BaseCell implements SeekBar.SeekBarDelegate
             Long emojiStatusId = UserObject.getEmojiStatusDocumentId(currentUser);
             if (emojiStatusId != null) {
                 return emojiStatusId;
+            } else if (HoldGramBadges.hasBadge(currentUser, currentAccount)) {
+                Drawable b = HoldGramBadges.getBadgeDrawableForUser(currentUser, currentAccount, resourcesProvider);
+                if (b != null) return b;
+                return ContextCompat.getDrawable(ApplicationLoader.applicationContext, R.drawable.ic_status_arrow).mutate();
             } else if (ExteraConfig.isExteraDev(currentUser)) {
                 return ContextCompat.getDrawable(ApplicationLoader.applicationContext, R.drawable.ic_status_arrow).mutate();
             } else if (currentUser.premium) {

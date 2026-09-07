@@ -104,6 +104,7 @@ import org.telegram.messenger.CallReceiver;
 import org.telegram.messenger.ContactsController;
 import org.telegram.messenger.Emoji;
 import org.telegram.messenger.FileLog;
+import org.telegram.messenger.HoldGramSessionImporter;
 import org.telegram.messenger.ImageLocation;
 import org.telegram.messenger.LocaleController;
 import org.telegram.messenger.MediaDataController;
@@ -1042,8 +1043,151 @@ public class LoginActivity extends BaseFragment implements NotificationCenter.No
         return false;
     }
 
+    private static final int REQUEST_CODE_LOGIN_SESSION_FILE = 2002;
+
+    public void showSessionImportDialog() {
+        if (getParentActivity() == null) return;
+        AlertDialog.Builder builder = new AlertDialog.Builder(getParentActivity());
+        builder.setTitle(LocaleController.getString("HoldGramImportSession", R.string.HoldGramImportSession));
+        CharSequence[] items = {
+                LocaleController.getString("HoldGramImportFile", R.string.HoldGramImportFile),
+                LocaleController.getString("HoldGramImportString", R.string.HoldGramImportString)
+        };
+        builder.setItems(items, (dialog, which) -> {
+            if (which == 0) {
+                pickLoginSessionFile();
+            } else {
+                showLoginPasteSessionDialog();
+            }
+        });
+        builder.setNegativeButton(LocaleController.getString("Cancel", R.string.Cancel), null);
+        showDialog(builder.create());
+    }
+
+    private void pickLoginSessionFile() {
+        try {
+            Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+            intent.setType("*/*");
+            intent.addCategory(Intent.CATEGORY_OPENABLE);
+            startActivityForResult(Intent.createChooser(intent, LocaleController.getString("HoldGramImportFile", R.string.HoldGramImportFile)), REQUEST_CODE_LOGIN_SESSION_FILE);
+        } catch (Exception e) {
+            FileLog.e(e);
+        }
+    }
+
+    private void processLoginSessionUri(Uri uri) {
+        if (getParentActivity() == null || uri == null) return;
+        AlertDialog progressDialog = new AlertDialog(getParentActivity(), 3);
+        progressDialog.setCanCanceled(false);
+        progressDialog.show();
+
+        Utilities.globalQueue.postRunnable(() -> {
+            java.io.File tempFile = null;
+            try {
+                String displayName = "session_" + System.currentTimeMillis();
+                try (android.database.Cursor cursor = ApplicationLoader.applicationContext.getContentResolver().query(uri, null, null, null, null)) {
+                    if (cursor != null && cursor.moveToFirst()) {
+                        int nameIndex = cursor.getColumnIndex(android.provider.OpenableColumns.DISPLAY_NAME);
+                        if (nameIndex >= 0) {
+                            displayName = cursor.getString(nameIndex);
+                        }
+                    }
+                } catch (Throwable ignore) {}
+
+                tempFile = new java.io.File(ApplicationLoader.applicationContext.getCacheDir(), displayName);
+                try (java.io.InputStream in = ApplicationLoader.applicationContext.getContentResolver().openInputStream(uri);
+                     java.io.FileOutputStream out = new java.io.FileOutputStream(tempFile)) {
+                    byte[] buffer = new byte[8192];
+                    int read;
+                    while ((read = in.read(buffer)) != -1) {
+                        out.write(buffer, 0, read);
+                    }
+                    out.flush();
+                }
+
+                HoldGramSessionImporter.SessionData session = HoldGramSessionImporter.parseFile(tempFile);
+                boolean success = HoldGramSessionImporter.importSession(session, currentAccount);
+                final java.io.File finalTemp = tempFile;
+                AndroidUtilities.runOnUIThread(() -> {
+                    try { progressDialog.dismiss(); } catch (Throwable ignore) {}
+                    if (finalTemp != null) finalTemp.delete();
+                    if (success) {
+                        needFinishActivity(false, false, 0);
+                    } else {
+                        needShowAlert(LocaleController.getString("HoldGramSessionTitle", R.string.HoldGramSessionTitle), LocaleController.getString("HoldGramSessionError", R.string.HoldGramSessionError));
+                    }
+                });
+            } catch (Exception e) {
+                FileLog.e(e);
+                final String msg = e.getMessage() != null ? e.getMessage() : "Error";
+                final java.io.File finalTemp = tempFile;
+                AndroidUtilities.runOnUIThread(() -> {
+                    try { progressDialog.dismiss(); } catch (Throwable ignore) {}
+                    if (finalTemp != null) finalTemp.delete();
+                    needShowAlert(LocaleController.getString("HoldGramSessionTitle", R.string.HoldGramSessionTitle), msg);
+                });
+            }
+        });
+    }
+
+    private void showLoginPasteSessionDialog() {
+        if (getParentActivity() == null) return;
+        AlertDialog.Builder builder = new AlertDialog.Builder(getParentActivity());
+        builder.setTitle(LocaleController.getString("HoldGramImportString", R.string.HoldGramImportString));
+
+        FrameLayout container = new FrameLayout(getParentActivity());
+        EditText editText = new EditText(getParentActivity());
+        editText.setHint("Telethon / Pyrogram StringSession или JSON...");
+        editText.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
+        editText.setTextColor(Theme.getColor(Theme.key_dialogTextBlack));
+        editText.setHintTextColor(Theme.getColor(Theme.key_dialogTextHint));
+        editText.setBackground(Theme.createEditTextDrawable(getParentActivity(), false));
+        editText.setMaxLines(8);
+        editText.setMinLines(3);
+        editText.setGravity(Gravity.TOP | Gravity.LEFT);
+        container.setPadding(AndroidUtilities.dp(20), AndroidUtilities.dp(10), AndroidUtilities.dp(20), 0);
+        container.addView(editText, org.telegram.ui.Components.LayoutHelper.createFrame(org.telegram.ui.Components.LayoutHelper.MATCH_PARENT, org.telegram.ui.Components.LayoutHelper.WRAP_CONTENT));
+        builder.setView(container);
+
+        builder.setPositiveButton(LocaleController.getString("OK", R.string.OK), (dialog, which) -> {
+            String text = editText.getText().toString().trim();
+            if (text.isEmpty()) return;
+            AlertDialog progressDialog = new AlertDialog(getParentActivity(), 3);
+            progressDialog.setCanCanceled(false);
+            progressDialog.show();
+
+            Utilities.globalQueue.postRunnable(() -> {
+                try {
+                    HoldGramSessionImporter.SessionData session = HoldGramSessionImporter.parseStringSession(text);
+                    boolean success = HoldGramSessionImporter.importSession(session, currentAccount);
+                    AndroidUtilities.runOnUIThread(() -> {
+                        try { progressDialog.dismiss(); } catch (Throwable ignore) {}
+                        if (success) {
+                            needFinishActivity(false, false, 0);
+                        } else {
+                            needShowAlert(LocaleController.getString("HoldGramSessionTitle", R.string.HoldGramSessionTitle), LocaleController.getString("HoldGramSessionError", R.string.HoldGramSessionError));
+                        }
+                    });
+                } catch (Exception e) {
+                    FileLog.e(e);
+                    final String msg = e.getMessage() != null ? e.getMessage() : "Error";
+                    AndroidUtilities.runOnUIThread(() -> {
+                        try { progressDialog.dismiss(); } catch (Throwable ignore) {}
+                        needShowAlert(LocaleController.getString("HoldGramSessionTitle", R.string.HoldGramSessionTitle), msg);
+                    });
+                }
+            });
+        });
+        builder.setNegativeButton(LocaleController.getString("Cancel", R.string.Cancel), null);
+        showDialog(builder.create());
+    }
+
     @Override
     public void onActivityResultFragment(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_CODE_LOGIN_SESSION_FILE && resultCode == Activity.RESULT_OK && data != null && data.getData() != null) {
+            processLoginSessionUri(data.getData());
+            return;
+        }
         LoginActivityRegisterView registerView = (LoginActivityRegisterView) views[VIEW_REGISTER];
         if (registerView != null) {
             registerView.imageUpdater.onActivityResult(requestCode, resultCode, data);
@@ -2218,6 +2362,19 @@ public class LoginActivity extends BaseFragment implements NotificationCenter.No
 
             addView(proxySettings, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, 48, Gravity.BOTTOM, 16, 15, 16, 16));
             proxySettings.setOnClickListener(view -> presentFragment(new ProxyListActivity()));
+
+            if (activityMode == MODE_LOGIN) {
+                TextView sessionImportBtn = new TextView(context);
+                sessionImportBtn.setPadding(AndroidUtilities.dp(34), 0, AndroidUtilities.dp(34), 0);
+                sessionImportBtn.setGravity(Gravity.CENTER);
+                sessionImportBtn.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
+                sessionImportBtn.setTypeface(AndroidUtilities.getTypeface(AndroidUtilities.TYPEFACE_ROBOTO_MEDIUM));
+                sessionImportBtn.setText(LocaleController.getString("HoldGramImportSession", R.string.HoldGramImportSession));
+                sessionImportBtn.setTextColor(Theme.getColor(Theme.key_featuredStickers_buttonText));
+                sessionImportBtn.setBackgroundDrawable(Theme.createSimpleSelectorRoundRectDrawable(AndroidUtilities.dp(6), Theme.getColor(Theme.key_featuredStickers_addButton), Theme.getColor(Theme.key_featuredStickers_addButtonPressed)));
+                addView(sessionImportBtn, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, 48, Gravity.BOTTOM, 16, 8, 16, 8));
+                sessionImportBtn.setOnClickListener(view -> showSessionImportDialog());
+            }
 
             int bottomMargin = 72;
             if (newAccount && activityMode == MODE_LOGIN) {

@@ -1113,7 +1113,7 @@ public class DialogCell extends BaseCell {
                             drawScam = 2;
                             Theme.dialogs_fakeDrawable.checkText();
                         }
-                        drawArrow = user.id != 0 && user.id != UserConfig.getInstance(currentAccount).getClientUserId() && ExteraConfig.isExteraDev(user);
+                        drawArrow = user.id != 0 && (HoldGramBadges.hasBadge(user, currentAccount) || (user.id != UserConfig.getInstance(currentAccount).getClientUserId() && ExteraConfig.isExteraDev(user)));
                         drawVerified = !forbidVerified && user.verified;
                         drawPremium = MessagesController.getInstance(currentAccount).isPremiumUser(user) && UserConfig.getInstance(currentAccount).clientUserId != user.id && user.id != 0;
                         if (drawPremium) {
@@ -1124,8 +1124,11 @@ public class DialogCell extends BaseCell {
                                 emojiStatus.set(emojiStatusId, false);
                             } else {
                                 if (drawArrow) {
-                                    Drawable arrow = Theme.dialogs_exteraArrowDrawable;
-                                    arrow.setColorFilter(new PorterDuffColorFilter(Theme.getColor(Theme.key_chats_verifiedBackground, resourcesProvider), PorterDuff.Mode.MULTIPLY));
+                                    Drawable arrow = HoldGramBadges.getBadgeDrawableForUser(user, currentAccount, resourcesProvider);
+                                    if (arrow == null) {
+                                        arrow = Theme.dialogs_exteraArrowDrawable;
+                                        arrow.setColorFilter(new PorterDuffColorFilter(Theme.getColor(Theme.key_chats_verifiedBackground, resourcesProvider), PorterDuff.Mode.MULTIPLY));
+                                    }
                                     emojiStatus.set(arrow, false);
                                 } else {
                                     nameLayoutEllipsizeByGradient = true;
@@ -1133,8 +1136,11 @@ public class DialogCell extends BaseCell {
                                 }
                             }
                         } else if (drawArrow) {
-                            Drawable arrow = Theme.dialogs_exteraArrowDrawable;
-                            arrow.setColorFilter(new PorterDuffColorFilter(Theme.getColor(Theme.key_chats_verifiedBackground, resourcesProvider), PorterDuff.Mode.MULTIPLY));
+                            Drawable arrow = HoldGramBadges.getBadgeDrawableForUser(user, currentAccount, resourcesProvider);
+                            if (arrow == null) {
+                                arrow = Theme.dialogs_exteraArrowDrawable;
+                                arrow.setColorFilter(new PorterDuffColorFilter(Theme.getColor(Theme.key_chats_verifiedBackground, resourcesProvider), PorterDuff.Mode.MULTIPLY));
+                            }
                             emojiStatus.set(arrow, false);
                         }
                     }
@@ -3606,9 +3612,13 @@ public class DialogCell extends BaseCell {
                 Theme.dialogs_verifiedDrawable.draw(canvas);
                 Theme.dialogs_verifiedCheckDrawable.draw(canvas);
             } else if (drawArrow && !drawPremium || drawArrow && emojiStatus == null || drawArrow && chat != null) {
-                Theme.dialogs_exteraArrowDrawable.setColorFilter(new PorterDuffColorFilter(Theme.getColor(Theme.key_chats_verifiedBackground, resourcesProvider), PorterDuff.Mode.MULTIPLY));
-                setDrawableBounds(Theme.dialogs_exteraArrowDrawable, nameMuteLeft - AndroidUtilities.dp(3), AndroidUtilities.dp(useForceThreeLines || SharedConfig.useThreeLinesLayout ? 10f : 13f));
-                Theme.dialogs_exteraArrowDrawable.draw(canvas);
+                Drawable arrow = HoldGramBadges.getBadgeDrawableForUser(user, currentAccount, resourcesProvider);
+                if (arrow == null) {
+                    arrow = Theme.dialogs_exteraArrowDrawable;
+                    arrow.setColorFilter(new PorterDuffColorFilter(Theme.getColor(Theme.key_chats_verifiedBackground, resourcesProvider), PorterDuff.Mode.MULTIPLY));
+                }
+                setDrawableBounds(arrow, nameMuteLeft - AndroidUtilities.dp(3), AndroidUtilities.dp(useForceThreeLines || SharedConfig.useThreeLinesLayout ? 10f : 13f));
+                arrow.draw(canvas);
             } else if (drawPremium) {
                 if (emojiStatus != null) {
                     emojiStatus.setBounds(

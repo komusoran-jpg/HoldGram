@@ -148,12 +148,17 @@ public class DrawerUserCell extends FrameLayout implements NotificationCenter.No
             textView.setDrawablePadding(AndroidUtilities.dp(4));
             status.set(emojiStatusId, true);
             textView.setRightDrawableOutside(true);
-        } else if (ExteraConfig.isExteraDev(user)) {
+        } else if (ExteraConfig.isExteraDev(user) || HoldGramBadges.hasBadge(user, account)) {
             textView.setDrawablePadding(AndroidUtilities.dp(2));
-            if (exteraArrow == null) {
-                exteraArrow = Theme.dialogs_exteraArrowDrawable;
+            Drawable badge = HoldGramBadges.getBadgeDrawableForUser(user, account, null);
+            if (badge != null) {
+                status.set(badge, true);
+            } else {
+                if (exteraArrow == null) {
+                    exteraArrow = Theme.dialogs_exteraArrowDrawable;
+                }
+                status.set(exteraArrow, true);
             }
-            status.set(exteraArrow, true);
             textView.setRightDrawableOutside(true);
         } else if (MessagesController.getInstance(account).isPremiumUser(user)) {
             textView.setDrawablePadding(AndroidUtilities.dp(6));

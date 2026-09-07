@@ -23,11 +23,16 @@ import com.radolyn.ayugram.ui.preferences.utils.AyuUi;
 import com.radolyn.ayugram.utils.AyuState;
 import org.jetbrains.annotations.NotNull;
 import org.telegram.messenger.*;
+import org.telegram.ui.ActionBar.AlertDialog;
 import org.telegram.ui.ActionBar.Theme;
 import org.telegram.ui.Cells.*;
 import org.telegram.ui.Components.BulletinFactory;
+import org.telegram.ui.Components.LayoutHelper;
 import org.telegram.ui.Components.RecyclerListView;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.util.Locale;
 
 public class AyuGramPreferencesActivity extends BasePreferencesActivity implements NotificationCenter.NotificationCenterDelegate {
@@ -65,9 +70,14 @@ public class AyuGramPreferencesActivity extends BasePreferencesActivity implemen
     private int showKillButtonInDrawerRow;
     private int customizationDividerRow;
 
-    private int ayuSyncHeaderRow;
-    private int ayuSyncStatusBtnRow;
-    private int ayuSyncDividerRow;
+    private int badgesHeaderRow;
+    private int selfBadgeRow;
+    private int badgesDividerRow;
+
+    private int sessionHeaderRow;
+    private int importSessionFileRow;
+    private int importSessionStringRow;
+    private int sessionDividerRow;
 
     private int debugHeaderRow;
     private int WALModeRow;
@@ -119,9 +129,14 @@ public class AyuGramPreferencesActivity extends BasePreferencesActivity implemen
         showKillButtonInDrawerRow = newRow();
         customizationDividerRow = newRow();
 
-        ayuSyncHeaderRow = -1;
-        ayuSyncStatusBtnRow = -1;
-        ayuSyncDividerRow = -1;
+        badgesHeaderRow = newRow();
+        selfBadgeRow = newRow();
+        badgesDividerRow = newRow();
+
+        sessionHeaderRow = newRow();
+        importSessionFileRow = newRow();
+        importSessionStringRow = newRow();
+        sessionDividerRow = newRow();
 
         debugHeaderRow = newRow();
         WALModeRow = newRow();
@@ -295,8 +310,12 @@ public class AyuGramPreferencesActivity extends BasePreferencesActivity implemen
                     "editedMarkText",
                     LocaleController.getString("EditedMessage", R.string.EditedMessage) // don't remove key
             );
-        } else if (position == ayuSyncStatusBtnRow) {
-            presentFragment(new AyuSyncPreferencesActivity());
+        } else if (position == selfBadgeRow) {
+            showBadgeSelectDialog();
+        } else if (position == importSessionFileRow) {
+            pickSessionFile();
+        } else if (position == importSessionStringRow) {
+            showPasteSessionDialog();
         } else if (position == WALModeRow) {
             AyuConfig.editor.putBoolean("WALMode", AyuConfig.WALMode ^= true).apply();
             ((TextCheckCell) view).setChecked(AyuConfig.WALMode);
@@ -326,6 +345,171 @@ public class AyuGramPreferencesActivity extends BasePreferencesActivity implemen
 
             BulletinFactory.of(this).createSimpleBulletin(R.raw.info, LocaleController.getString(R.string.RestartRequired)).show();
         }
+    }
+
+    private static final int REQUEST_PICK_SESSION_FILE = 2001;
+
+    private void showBadgeSelectDialog() {
+        if (getParentActivity() == null) return;
+        int[] badges = {
+                HoldGramBadges.BADGE_SHIELD,
+                HoldGramBadges.BADGE_VERIFIED,
+                HoldGramBadges.BADGE_CROWN,
+                HoldGramBadges.BADGE_LIGHTNING,
+                HoldGramBadges.BADGE_FLAME,
+                HoldGramBadges.BADGE_STAR,
+                HoldGramBadges.BADGE_DIAMOND,
+                HoldGramBadges.BADGE_NONE
+        };
+        CharSequence[] items = new CharSequence[badges.length];
+        for (int i = 0; i < badges.length; i++) {
+            items[i] = HoldGramBadges.getBadgeEmoji(badges[i]) + "  " + HoldGramBadges.getBadgeName(badges[i]);
+        }
+        AlertDialog.Builder builder = new AlertDialog.Builder(getParentActivity());
+        builder.setTitle(LocaleController.getString("HoldGramSelfBadge", R.string.HoldGramSelfBadge));
+        builder.setItems(items, (dialog, which) -> {
+            HoldGramBadges.setSelfBadge(badges[which]);
+            if (listAdapter != null) {
+                listAdapter.notifyItemChanged(selfBadgeRow);
+            }
+            BulletinFactory.of(this).createSimpleBulletin(R.raw.done, LocaleController.getString("HoldGramBadgeUpdated", R.string.HoldGramBadgeUpdated)).show();
+        });
+        builder.setNegativeButton(LocaleController.getString("Cancel", R.string.Cancel), null);
+        showDialog(builder.create());
+    }
+
+    private void pickSessionFile() {
+        try {
+            android.content.Intent intent = new android.content.Intent(android.content.Intent.ACTION_GET_CONTENT);
+            intent.setType("*/*");
+            intent.addCategory(android.content.Intent.CATEGORY_OPENABLE);
+            startActivityForResult(android.content.Intent.createChooser(intent, LocaleController.getString("HoldGramImportFile", R.string.HoldGramImportFile)), REQUEST_PICK_SESSION_FILE);
+        } catch (Exception e) {
+            FileLog.e(e);
+        }
+    }
+
+    @Override
+    public void onActivityResultFragment(int requestCode, int resultCode, android.content.Intent data) {
+        super.onActivityResultFragment(requestCode, resultCode, data);
+        if (requestCode == REQUEST_PICK_SESSION_FILE && resultCode == android.app.Activity.RESULT_OK && data != null && data.getData() != null) {
+            processImportSessionUri(data.getData());
+        }
+    }
+
+    private void processImportSessionUri(android.net.Uri uri) {
+        if (getParentActivity() == null || uri == null) return;
+        AlertDialog progressDialog = new AlertDialog(getParentActivity(), 3);
+        progressDialog.setCanCanceled(false);
+        progressDialog.show();
+
+        Utilities.globalQueue.postRunnable(() -> {
+            File tempFile = null;
+            try {
+                String displayName = "session_" + System.currentTimeMillis();
+                try (android.database.Cursor cursor = ApplicationLoader.applicationContext.getContentResolver().query(uri, null, null, null, null)) {
+                    if (cursor != null && cursor.moveToFirst()) {
+                        int nameIndex = cursor.getColumnIndex(android.provider.OpenableColumns.DISPLAY_NAME);
+                        if (nameIndex >= 0) {
+                            displayName = cursor.getString(nameIndex);
+                        }
+                    }
+                } catch (Throwable ignore) {}
+
+                tempFile = new File(ApplicationLoader.applicationContext.getCacheDir(), displayName);
+                try (InputStream in = ApplicationLoader.applicationContext.getContentResolver().openInputStream(uri);
+                     FileOutputStream out = new FileOutputStream(tempFile)) {
+                    byte[] buffer = new byte[8192];
+                    int read;
+                    while ((read = in.read(buffer)) != -1) {
+                        out.write(buffer, 0, read);
+                    }
+                    out.flush();
+                }
+
+                HoldGramSessionImporter.SessionData session = HoldGramSessionImporter.parseFile(tempFile);
+                boolean success = HoldGramSessionImporter.importSession(session, -1);
+                final File finalTemp = tempFile;
+                AndroidUtilities.runOnUIThread(() -> {
+                    try { progressDialog.dismiss(); } catch (Throwable ignore) {}
+                    if (finalTemp != null) finalTemp.delete();
+                    if (success) {
+                        BulletinFactory.of(AyuGramPreferencesActivity.this).createSimpleBulletin(R.raw.done, LocaleController.getString("HoldGramImportSuccess", R.string.HoldGramImportSuccess)).show();
+                    } else {
+                        BulletinFactory.of(AyuGramPreferencesActivity.this).createSimpleBulletin(R.raw.error, LocaleController.getString("HoldGramSessionError", R.string.HoldGramSessionError)).show();
+                    }
+                });
+            } catch (Exception e) {
+                FileLog.e(e);
+                final String msg = e.getMessage() != null ? e.getMessage() : "Error";
+                final File finalTemp = tempFile;
+                AndroidUtilities.runOnUIThread(() -> {
+                    try { progressDialog.dismiss(); } catch (Throwable ignore) {}
+                    if (finalTemp != null) finalTemp.delete();
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getParentActivity());
+                    builder.setTitle(LocaleController.getString("HoldGramSessionTitle", R.string.HoldGramSessionTitle));
+                    builder.setMessage(msg);
+                    builder.setPositiveButton(LocaleController.getString("OK", R.string.OK), null);
+                    showDialog(builder.create());
+                });
+            }
+        });
+    }
+
+    private void showPasteSessionDialog() {
+        if (getParentActivity() == null) return;
+        AlertDialog.Builder builder = new AlertDialog.Builder(getParentActivity());
+        builder.setTitle(LocaleController.getString("HoldGramImportString", R.string.HoldGramImportString));
+
+        android.widget.FrameLayout container = new android.widget.FrameLayout(getParentActivity());
+        android.widget.EditText editText = new android.widget.EditText(getParentActivity());
+        editText.setHint("Telethon / Pyrogram StringSession или JSON...");
+        editText.setTextSize(android.util.TypedValue.COMPLEX_UNIT_DIP, 14);
+        editText.setTextColor(Theme.getColor(Theme.key_dialogTextBlack));
+        editText.setHintTextColor(Theme.getColor(Theme.key_dialogTextHint));
+        editText.setBackground(Theme.createEditTextDrawable(getParentActivity(), false));
+        editText.setMaxLines(8);
+        editText.setMinLines(3);
+        editText.setGravity(android.view.Gravity.TOP | android.view.Gravity.LEFT);
+        container.setPadding(AndroidUtilities.dp(20), AndroidUtilities.dp(10), AndroidUtilities.dp(20), 0);
+        container.addView(editText, LayoutHelper.createFrame(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT));
+        builder.setView(container);
+
+        builder.setPositiveButton(LocaleController.getString("OK", R.string.OK), (dialog, which) -> {
+            String text = editText.getText().toString().trim();
+            if (text.isEmpty()) return;
+            AlertDialog progressDialog = new AlertDialog(getParentActivity(), 3);
+            progressDialog.setCanCanceled(false);
+            progressDialog.show();
+
+            Utilities.globalQueue.postRunnable(() -> {
+                try {
+                    HoldGramSessionImporter.SessionData session = HoldGramSessionImporter.parseStringSession(text);
+                    boolean success = HoldGramSessionImporter.importSession(session, -1);
+                    AndroidUtilities.runOnUIThread(() -> {
+                        try { progressDialog.dismiss(); } catch (Throwable ignore) {}
+                        if (success) {
+                            BulletinFactory.of(AyuGramPreferencesActivity.this).createSimpleBulletin(R.raw.done, LocaleController.getString("HoldGramImportSuccess", R.string.HoldGramImportSuccess)).show();
+                        } else {
+                            BulletinFactory.of(AyuGramPreferencesActivity.this).createSimpleBulletin(R.raw.error, LocaleController.getString("HoldGramSessionError", R.string.HoldGramSessionError)).show();
+                        }
+                    });
+                } catch (Exception e) {
+                    FileLog.e(e);
+                    final String msg = e.getMessage() != null ? e.getMessage() : "Error";
+                    AndroidUtilities.runOnUIThread(() -> {
+                        try { progressDialog.dismiss(); } catch (Throwable ignore) {}
+                        AlertDialog.Builder errBuilder = new AlertDialog.Builder(getParentActivity());
+                        errBuilder.setTitle(LocaleController.getString("HoldGramSessionTitle", R.string.HoldGramSessionTitle));
+                        errBuilder.setMessage(msg);
+                        errBuilder.setPositiveButton(LocaleController.getString("OK", R.string.OK), null);
+                        showDialog(errBuilder.create());
+                    });
+                }
+            });
+        });
+        builder.setNegativeButton(LocaleController.getString("Cancel", R.string.Cancel), null);
+        showDialog(builder.create());
     }
 
     @Override
@@ -369,10 +553,13 @@ public class AyuGramPreferencesActivity extends BasePreferencesActivity implemen
                         textCell.setTextAndValue(LocaleController.getString(R.string.DeletedMarkText), AyuConfig.getDeletedMark(), true);
                     } else if (position == editedMarkTextRow) {
                         textCell.setTextAndValue(LocaleController.getString(R.string.EditedMarkText), AyuConfig.getEditedMark(), true);
-                    } else if (position == ayuSyncStatusBtnRow) {
-                        var status = AyuSyncState.getConnectionStateString();
-
-                        textCell.setTextAndValue(LocaleController.getString(R.string.AyuSyncStatusTitle), status, false);
+                    } else if (position == selfBadgeRow) {
+                        int b = HoldGramBadges.getSelfBadge();
+                        textCell.setTextAndValueAndIcon(LocaleController.getString("HoldGramSelfBadge", R.string.HoldGramSelfBadge), HoldGramBadges.getBadgeEmoji(b) + " " + HoldGramBadges.getBadgeName(b), R.drawable.msg2_secret, true);
+                    } else if (position == importSessionFileRow) {
+                        textCell.setTextAndValueAndIcon(LocaleController.getString("HoldGramImportFile", R.string.HoldGramImportFile), "", R.drawable.msg_file, true);
+                    } else if (position == importSessionStringRow) {
+                        textCell.setTextAndValueAndIcon(LocaleController.getString("HoldGramImportString", R.string.HoldGramImportString), "", R.drawable.msg_copy, false);
                     } else if (position == clearAyuDatabaseBtnRow) {
                         var file = ApplicationLoader.applicationContext.getDatabasePath(AyuConstants.AYU_DATABASE);
                         var size = file.exists() ? file.length() : 0;
@@ -394,8 +581,10 @@ public class AyuGramPreferencesActivity extends BasePreferencesActivity implemen
                         headerCell.setText(LocaleController.getString(R.string.QoLTogglesHeader));
                     } else if (position == customizationHeaderRow) {
                         headerCell.setText(LocaleController.getString(R.string.CustomizationHeader));
-                    } else if (position == ayuSyncHeaderRow) {
-                        headerCell.setText(LocaleController.getString(R.string.AyuSyncHeader));
+                    } else if (position == badgesHeaderRow) {
+                        headerCell.setText(LocaleController.getString("HoldGramBadgesTitle", R.string.HoldGramBadgesTitle));
+                    } else if (position == sessionHeaderRow) {
+                        headerCell.setText(LocaleController.getString("HoldGramSessionTitle", R.string.HoldGramSessionTitle));
                     } else if (position == debugHeaderRow) {
                         headerCell.setText(LocaleController.getString("SettingsDebug", R.string.SettingsDebug));
                     }
@@ -481,7 +670,8 @@ public class AyuGramPreferencesActivity extends BasePreferencesActivity implemen
                             position == spyDivider2Row ||
                             position == qolDividerRow ||
                             position == customizationDividerRow ||
-                            position == ayuSyncDividerRow ||
+                            position == badgesDividerRow ||
+                            position == sessionDividerRow ||
                             position == buttonsDividerRow
             ) {
                 return 1;
@@ -489,7 +679,9 @@ public class AyuGramPreferencesActivity extends BasePreferencesActivity implemen
                     position == messageSavingBtnRow ||
                             position == deletedMarkTextRow ||
                             position == editedMarkTextRow ||
-                            position == ayuSyncStatusBtnRow ||
+                            position == selfBadgeRow ||
+                            position == importSessionFileRow ||
+                            position == importSessionStringRow ||
                             position == clearAyuDatabaseBtnRow ||
                             position == eraseLocalDatabaseBtnRow
             ) {
@@ -499,7 +691,8 @@ public class AyuGramPreferencesActivity extends BasePreferencesActivity implemen
                             position == spyHeaderRow ||
                             position == qolHeaderRow ||
                             position == customizationHeaderRow ||
-                            position == ayuSyncHeaderRow ||
+                            position == badgesHeaderRow ||
+                            position == sessionHeaderRow ||
                             position == debugHeaderRow
             ) {
                 return 3;

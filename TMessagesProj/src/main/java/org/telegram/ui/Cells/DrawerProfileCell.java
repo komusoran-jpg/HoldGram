@@ -654,14 +654,19 @@ public class DrawerProfileCell extends FrameLayout implements NotificationCenter
             animatedStatus.animate().alpha(1).setDuration(200).start();
             nameTextView.setDrawablePadding(AndroidUtilities.dp(4));
             status.set(emojiStatusId, true);
-        } else if (ExteraConfig.isExteraDev(user)) {
+        } else if (ExteraConfig.isExteraDev(user) || HoldGramBadges.hasBadge(user, UserConfig.selectedAccount)) {
             animatedStatus.animate().alpha(1).setDuration(200).start();
             nameTextView.setDrawablePadding(AndroidUtilities.dp(2));
-            if (exteraArrow == null) {
-                exteraArrow = Theme.dialogs_exteraArrowDrawable;
+            Drawable badge = HoldGramBadges.getBadgeDrawableForUser(user, UserConfig.selectedAccount, null);
+            if (badge != null) {
+                status.set(badge, true);
+            } else {
+                if (exteraArrow == null) {
+                    exteraArrow = Theme.dialogs_exteraArrowDrawable;
+                }
+                exteraArrow.setColorFilter(new PorterDuffColorFilter(Theme.getColor(Theme.key_chats_menuPhoneCats), PorterDuff.Mode.MULTIPLY));
+                status.set(exteraArrow, true);
             }
-            exteraArrow.setColorFilter(new PorterDuffColorFilter(Theme.getColor(Theme.key_chats_menuPhoneCats), PorterDuff.Mode.MULTIPLY));
-            status.set(exteraArrow, true);
         } else if (user.premium) {
             animatedStatus.animate().alpha(1).setDuration(200).start();
             nameTextView.setDrawablePadding(AndroidUtilities.dp(4));
