@@ -94,6 +94,17 @@ jobs:
           name: build-log
           path: build.log
 
+      - name: Push Build Log to Git Branch
+        if: always()
+        continue-on-error: true
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout -B build-logs
+          git add -f build.log
+          git commit -m "chore: build log for run ${{ github.run_number }}" || true
+          git push -f origin build-logs || true
+
       - name: Deploy Build Log to VPS
         if: always() && env.SSH_PRIVATE_KEY != ''
         continue-on-error: true
