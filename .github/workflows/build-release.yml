@@ -74,6 +74,7 @@ jobs:
 
       - name: Build HoldGram APK
         run: |
+          set -o pipefail
           ./gradlew assembleAfatRelease --no-daemon --no-configuration-cache --stacktrace 2>&1 | tee build.log
 
       - name: Show Failure Summary
@@ -96,8 +97,10 @@ jobs:
       - name: Prepare Release Artifacts
         run: |
           mkdir -p dist
-          APK_PATH=$(find TMessagesProj/build/outputs/apk/afat/release -name "*.apk" | head -n 1)
-          if [ -f "$APK_PATH" ]; then
+          echo "Listing all generated APKs:"
+          find TMessagesProj/build/outputs/apk -type f -name "*.apk" || true
+          APK_PATH=$(find TMessagesProj/build/outputs/apk -type f -name "*.apk" ! -name "*-unaligned.apk" | head -n 1)
+          if [ -n "$APK_PATH" ] && [ -f "$APK_PATH" ]; then
             cp "$APK_PATH" dist/HoldGram.apk
             echo "Built APK: $APK_PATH -> dist/HoldGram.apk ($(ls -lh dist/HoldGram.apk | awk '{print $5}'))"
           else

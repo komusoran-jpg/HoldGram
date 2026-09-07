@@ -178,9 +178,6 @@ android {
             ndk.debugSymbolLevel = 'NONE'
             buildConfigField "boolean", "DEBUG_VERSION", "false"
             buildConfigField "boolean", "IS_PM_BUILD", isPmBuild
-            firebaseCrashlytics {
-                mappingFileUploadEnabled false
-            }
         }
     }
 
