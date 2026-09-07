@@ -1,0 +1,422 @@
+
+Welcome to Gradle 7.5.1!
+
+Here are the highlights of this release:
+ - Support for Java 18
+ - Support for building with Groovy 4
+ - Much more responsive continuous builds
+ - Improved diagnostics for dependency resolution
+
+For more details see https://docs.gradle.org/7.5.1/release-notes.html
+
+To honour the JVM settings for this build a single-use Daemon process will be forked. See https://docs.gradle.org/7.5.1/userguide/gradle_daemon.html#sec:disabling_the_daemon.
+Daemon will be stopped at the end of the build 
+
+> Configure project :TMessagesProj
+WARNING:The option setting 'android.experimental.enableNewResourceShrinker.preciseShrinking=true' is experimental.
+The current default is 'false'.
+WARNING:The option setting 'android.enableAppCompileTimeRClass=true' is experimental.
+The current default is 'false'.
+[CXX5202] This app only has 32-bit [armeabi-v7a] native libraries. Beginning August 1, 2019 Google Play store requires that all apps that include native libraries must provide 64-bit versions. For more information, visit https://g.co/64-bit-requirement
+[CXX5202] This app only has 32-bit [x86] native libraries. Beginning August 1, 2019 Google Play store requires that all apps that include native libraries must provide 64-bit versions. For more information, visit https://g.co/64-bit-requirement
+WARNING:[CXX5202] This app only has 32-bit [armeabi-v7a] native libraries. Beginning August 1, 2019 Google Play store requires that all apps that include native libraries must provide 64-bit versions. For more information, visit https://g.co/64-bit-requirement
+[CXX5202] This app only has 32-bit [armeabi-v7a] native libraries. Beginning August 1, 2019 Google Play store requires that all apps that include native libraries must provide 64-bit versions. For more information, visit https://g.co/64-bit-requirement
+WARNING:[CXX5202] This app only has 32-bit [x86] native libraries. Beginning August 1, 2019 Google Play store requires that all apps that include native libraries must provide 64-bit versions. For more information, visit https://g.co/64-bit-requirement
+[CXX5202] This app only has 32-bit [x86] native libraries. Beginning August 1, 2019 Google Play store requires that all apps that include native libraries must provide 64-bit versions. For more information, visit https://g.co/64-bit-requirement
+Warning: SDK processing. This version only understands SDK XML versions up to 3 but an SDK XML file of version 4 was encountered. This can happen if you use versions of Android Studio and the command-line tools that were released at different times.
+
+> Task :TMessagesProj:preBuild UP-TO-DATE
+> Task :TMessagesProj:preArm64ReleaseBuild UP-TO-DATE
+> Task :TMessagesProj:mergeArm64ReleaseNativeDebugMetadata NO-SOURCE
+> Task :TMessagesProj:compileArm64ReleaseAidl NO-SOURCE
+> Task :TMessagesProj:compileArm64ReleaseRenderscript NO-SOURCE
+> Task :TMessagesProj:checkArm64ReleaseDuplicateClasses
+> Task :TMessagesProj:generateArm64ReleaseBuildConfig FROM-CACHE
+> Task :TMessagesProj:generateArm64ReleaseResValues FROM-CACHE
+> Task :TMessagesProj:generateArm64ReleaseResources UP-TO-DATE
+> Task :TMessagesProj:injectCrashlyticsMappingFileIdArm64Release
+> Task :TMessagesProj:processArm64ReleaseGoogleServices
+> Task :TMessagesProj:packageArm64ReleaseResources
+> Task :TMessagesProj:createArm64ReleaseCompatibleScreenManifests
+> Task :TMessagesProj:extractDeepLinksArm64Release FROM-CACHE
+> Task :TMessagesProj:processArm64ReleaseMainManifest FROM-CACHE
+> Task :TMessagesProj:parseArm64ReleaseLocalResources
+> Task :TMessagesProj:processArm64ReleaseManifest FROM-CACHE
+> Task :TMessagesProj:processArm64ReleaseManifestForPackage FROM-CACHE
+> Task :TMessagesProj:generateArm64ReleaseRFile FROM-CACHE
+> Task :TMessagesProj:javaPreCompileArm64Release FROM-CACHE
+> Task :TMessagesProj:compileArm64ReleaseJavaWithJavac
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Note: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+
+> Task :TMessagesProj:extractProguardFiles
+> Task :TMessagesProj:checkArm64ReleaseAarMetadata
+> Task :TMessagesProj:mapArm64ReleaseSourceSetPaths
+
+> Task :TMessagesProj:mergeArm64ReleaseResources
+/home/runner/work/HoldGram/HoldGram/TMessagesProj/src/main/res/values/strings.xml:1425:4: Multiple substitutions specified in non-positional format of string resource string/ForwardingFromNameAndMessage. Did you mean to add the formatted="false" attribute?
+/home/runner/work/HoldGram/HoldGram/TMessagesProj/src/main/res/values/strings.xml:6006:4: Multiple substitutions specified in non-positional format of string resource string/NotificationTopicExceptionsDesctription_few. Did you mean to add the formatted="false" attribute?
+/home/runner/work/HoldGram/HoldGram/TMessagesProj/src/main/res/values/strings.xml:6003:4: Multiple substitutions specified in non-positional format of string resource string/NotificationTopicExceptionsDesctription_many. Did you mean to add the formatted="false" attribute?
+/home/runner/work/HoldGram/HoldGram/TMessagesProj/src/main/res/values/strings.xml:6007:4: Multiple substitutions specified in non-positional format of string resource string/NotificationTopicExceptionsDesctription_one. Did you mean to add the formatted="false" attribute?
+/home/runner/work/HoldGram/HoldGram/TMessagesProj/src/main/res/values/strings.xml:6004:4: Multiple substitutions specified in non-positional format of string resource string/NotificationTopicExceptionsDesctription_other. Did you mean to add the formatted="false" attribute?
+/home/runner/work/HoldGram/HoldGram/TMessagesProj/src/main/res/values/strings.xml:1495:4: Multiple substitutions specified in non-positional format of string resource string/NotificationTopicExceptionsDesctription_two. Did you mean to add the formatted="false" attribute?
+
+> Task :TMessagesProj:processArm64ReleaseJavaRes NO-SOURCE
+
+> Task :TMessagesProj:mergeArm64ReleaseResources
+/home/runner/work/HoldGram/HoldGram/TMessagesProj/src/main/res/values-ko/strings.xml:3433:4: Multiple substitutions specified in non-positional format of string resource string/CallEmojiKeyTooltip. Did you mean to add the formatted="false" attribute?
+
+> Task :TMessagesProj:mergeArm64ReleaseJavaResource
+> Task :TMessagesProj:mergeArm64ReleaseShaders FROM-CACHE
+> Task :TMessagesProj:compileArm64ReleaseShaders NO-SOURCE
+> Task :TMessagesProj:generateArm64ReleaseAssets UP-TO-DATE
+> Task :TMessagesProj:mergeArm64ReleaseAssets FROM-CACHE
+> Task :TMessagesProj:compressArm64ReleaseAssets FROM-CACHE
+> Task :TMessagesProj:processApplicationManifestArm64ReleaseForBundle
+
+> Task :TMessagesProj:configureCMakeRelWithDebInfo[arm64-v8a]
+C/C++: CMake Warning (dev) in CMakeLists.txt:
+C/C++:   No project() command is present.  The top-level CMakeLists.txt file must
+C/C++:   contain a literal, direct call to the project() command.  Add a line of
+C/C++:   code such as
+C/C++:     project(ProjectName)
+C/C++:   near the top of the file, but after cmake_minimum_required().
+C/C++:   CMake is pretending there is a "project(Project)" command on the first
+C/C++:   line.
+C/C++: This warning is for project developers.  Use -Wno-dev to suppress it.
+
+> Task :TMessagesProj:buildCMakeRelWithDebInfo[arm64-v8a]
+C/C++: ninja: Entering directory `/home/runner/work/HoldGram/HoldGram/TMessagesProj/.cxx/RelWithDebInfo/6c3n4546/arm64-v8a'
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/tgnet/Connection.cpp:223:93: warning: '&&' within '||' [-Wlogical-op-parentheses]
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/tgnet/Connection.cpp:223:93: note: place parentheses around the '&&' expression to silence this warning
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/tgnet/Connection.cpp:531:223: warning: '&&' within '||' [-Wlogical-op-parentheses]
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/tgnet/Connection.cpp:531:223: note: place parentheses around the '&&' expression to silence this warning
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/tgnet/Connection.cpp:664:57: warning: '&&' within '||' [-Wlogical-op-parentheses]
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/tgnet/Connection.cpp:664:57: note: place parentheses around the '&&' expression to silence this warning
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/tgnet/Connection.cpp:718:62: warning: '&&' within '||' [-Wlogical-op-parentheses]
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/tgnet/Connection.cpp:718:62: note: place parentheses around the '&&' expression to silence this warning
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/tgnet/Connection.cpp:718:147: warning: '&&' within '||' [-Wlogical-op-parentheses]
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/tgnet/Connection.cpp:718:147: note: place parentheses around the '&&' expression to silence this warning
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/tgnet/NativeByteBuffer.cpp:17:12: warning: unused variable 'buffersCount' [-Wunused-variable]
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/tgnet/ApiScheme.cpp:491:21: warning: unused variable 'document_id' [-Wunused-variable]
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/tgnet/ApiScheme.cpp:494:21: warning: unused variable 'document_id' [-Wunused-variable]
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/tgnet/ApiScheme.cpp:495:17: warning: unused variable 'until' [-Wunused-variable]
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/tgnet/ConnectionSocket.cpp:970:29: warning: '&&' within '||' [-Wlogical-op-parentheses]
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/tgnet/ConnectionSocket.cpp:970:29: note: place parentheses around the '&&' expression to silence this warning
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/tgnet/FileLog.cpp:181:16: warning: unused variable 'now' [-Wunused-variable]
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/tgnet/FileLog.cpp:200:16: warning: unused variable 'now' [-Wunused-variable]
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/tgnet/Request.cpp:90:19: warning: '&&' within '||' [-Wlogical-op-parentheses]
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/tgnet/Request.cpp:90:19: note: place parentheses around the '&&' expression to silence this warning
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/tgnet/Request.cpp:90:77: warning: '&&' within '||' [-Wlogical-op-parentheses]
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/tgnet/Request.cpp:90:77: note: place parentheses around the '&&' expression to silence this warning
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/tgnet/Datacenter.cpp:199:62: warning: '&&' within '||' [-Wlogical-op-parentheses]
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/tgnet/Datacenter.cpp:199:62: note: place parentheses around the '&&' expression to silence this warning
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/tgnet/Datacenter.cpp:257:62: warning: '&&' within '||' [-Wlogical-op-parentheses]
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/tgnet/Datacenter.cpp:257:62: note: place parentheses around the '&&' expression to silence this warning
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/tgnet/Datacenter.cpp:377:62: warning: '&&' within '||' [-Wlogical-op-parentheses]
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/tgnet/Datacenter.cpp:377:62: note: place parentheses around the '&&' expression to silence this warning
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/tgnet/Datacenter.cpp:446:62: warning: '&&' within '||' [-Wlogical-op-parentheses]
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/tgnet/Datacenter.cpp:446:62: note: place parentheses around the '&&' expression to silence this warning
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/rlottie/src/lottie/lottiemodel.cpp:211:73: warning: '&&' within '||' [-Wlogical-op-parentheses]
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/rlottie/src/lottie/lottiemodel.cpp:211:73: note: place parentheses around the '&&' expression to silence this warning
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/tgnet/ConnectionsManager.cpp:1244:127: warning: format specifies type 'long long' but the argument has type 'int64_t' (aka 'long') [-Wformat]
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/tgnet/ConnectionsManager.cpp:1248:116: warning: format specifies type 'long long' but the argument has type 'int64_t' (aka 'long') [-Wformat]
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/tgnet/ConnectionsManager.cpp:1897:101: warning: expression with side effects will be evaluated despite being used as an operand to 'typeid' [-Wpotentially-evaluated-expression]
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/tgnet/ConnectionsManager.cpp:2772:155: warning: expression with side effects will be evaluated despite being used as an operand to 'typeid' [-Wpotentially-evaluated-expression]
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/tgnet/ConnectionsManager.cpp:2965:17: warning: unused variable 'is_inited' [-Wunused-variable]
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/tgnet/ConnectionsManager.cpp:2997:43: warning: array subscript is of type 'char' [-Wchar-subscripts]
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/rlottie/src/vector/vraster.cpp:22:
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/./tgnet/FileLog.h:12:
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/./tgnet/Defines.h:140:16: warning: 'ConnectiosManagerDelegate' has virtual functions but non-virtual destructor [-Wnon-virtual-dtor]
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/./tgnet/Defines.h:156:16: warning: 'HandshakeDelegate' has virtual functions but non-virtual destructor [-Wnon-virtual-dtor]
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/rlottie/src/lottie/lottieparser.cpp:58:
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/./tgnet/FileLog.h:12:
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/./tgnet/Defines.h:140:16: warning: 'ConnectiosManagerDelegate' has virtual functions but non-virtual destructor [-Wnon-virtual-dtor]
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/./tgnet/Defines.h:156:16: warning: 'HandshakeDelegate' has virtual functions but non-virtual destructor [-Wnon-virtual-dtor]
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/rlottie/src/lottie/lottieparser.cpp:186:60: warning: field 'colorMap' will be initialized after field 'mFitzModifier' [-Wreorder]
+
+> Task :TMessagesProj:mergeArm64ReleaseArtProfile
+
+> Task :TMessagesProj:buildCMakeRelWithDebInfo[arm64-v8a]
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/Buffers.cpp:7:
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/Buffers.h:19:
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/threading.h:110:8: warning: private field 'maxPriority' is not used [-Wunused-private-field]
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/BlockingQueue.cpp:7:
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/BlockingQueue.h:12:
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/threading.h:110:8: warning: private field 'maxPriority' is not used [-Wunused-private-field]
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/logging.cpp:12:
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/VoIPController.h:24:
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/video/VideoSource.h:12:
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/Buffers.h:19:
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/threading.h:110:8: warning: private field 'maxPriority' is not used [-Wunused-private-field]
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/audio/AudioInput.cpp:7:
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/audio/../os/android/../../audio/AudioInput.h:13:
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/audio/../MediaStreamItf.h:14:
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/audio/../os/android/../../threading.h:110:8: warning: private field 'maxPriority' is not used [-Wunused-private-field]
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/os/android/AudioInputOpenSLES.cpp:11:
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/os/android/AudioInputOpenSLES.h:13:
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/os/android/../../audio/AudioInput.h:13:
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/os/android/../../audio/../MediaStreamItf.h:14:
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/threading.h:110:8: warning: private field 'maxPriority' is not used [-Wunused-private-field]
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/audio/AudioOutput.cpp:19:
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/audio/../os/android/AudioOutputAndroid.h:20:15: warning: 'Start' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/audio/../MediaStreamItf.h:24:15: note: overridden virtual function is here
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/audio/AudioOutput.cpp:19:
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/audio/../os/android/AudioOutputAndroid.h:21:15: warning: 'Stop' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/audio/../MediaStreamItf.h:25:15: note: overridden virtual function is here
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/audio/AudioOutput.cpp:7:
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/audio/../os/android/../../audio/AudioOutput.h:14:
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/audio/../MediaStreamItf.h:14:
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/threading.h:110:8: warning: private field 'maxPriority' is not used [-Wunused-private-field]
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/MediaStreamItf.cpp:8:
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/MediaStreamItf.h:14:
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/threading.h:110:8: warning: private field 'maxPriority' is not used [-Wunused-private-field]
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/OpusEncoder.cpp:7:
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/OpusEncoder.h:11:
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/MediaStreamItf.h:14:
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/threading.h:110:8: warning: private field 'maxPriority' is not used [-Wunused-private-field]
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/os/android/AudioOutputOpenSLES.cpp:10:
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/os/android/AudioOutputOpenSLES.h:13:
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/audio/AudioOutput.h:14:
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/MediaStreamItf.h:14:
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/os/android/../../threading.h:110:8: warning: private field 'maxPriority' is not used [-Wunused-private-field]
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/VoIPGroupController.cpp:7:
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/VoIPController.h:24:
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/video/VideoSource.h:12:
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/Buffers.h:19:
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/threading.h:110:8: warning: private field 'maxPriority' is not used [-Wunused-private-field]
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/JitterBuffer.cpp:7:
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/VoIPController.h:24:
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/video/VideoSource.h:12:
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/Buffers.h:19:
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/threading.h:110:8: warning: private field 'maxPriority' is not used [-Wunused-private-field]
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/OpusDecoder.cpp:7:
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/OpusDecoder.h:11:
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/audio/../MediaStreamItf.h:14:
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/threading.h:110:8: warning: private field 'maxPriority' is not used [-Wunused-private-field]
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/EchoCanceller.cpp:12:
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/EchoCanceller.h:10:
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/threading.h:110:8: warning: private field 'maxPriority' is not used [-Wunused-private-field]
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/os/android/AudioOutputAndroid.cpp:7:
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/os/android/AudioOutputAndroid.h:20:15: warning: 'Start' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/os/android/../../audio/../MediaStreamItf.h:24:15: note: overridden virtual function is here
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/os/android/AudioOutputAndroid.cpp:7:
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/os/android/AudioOutputAndroid.h:21:15: warning: 'Stop' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/os/android/../../audio/../MediaStreamItf.h:25:15: note: overridden virtual function is here
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/os/android/AudioOutputAndroid.cpp:7:
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/os/android/AudioOutputAndroid.h:11:
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/os/android/../../audio/AudioOutput.h:14:
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/os/android/../../audio/../MediaStreamItf.h:14:
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/threading.h:110:8: warning: private field 'maxPriority' is not used [-Wunused-private-field]
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/CongestionControl.cpp:7:
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/CongestionControl.h:12:
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/threading.h:110:8: warning: private field 'maxPriority' is not used [-Wunused-private-field]
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/os/android/AudioInputAndroid.cpp:7:
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/os/android/AudioInputAndroid.h:11:
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/os/android/../../audio/AudioInput.h:13:
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/os/android/../../audio/../MediaStreamItf.h:14:
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/os/android/../../threading.h:110:8: warning: private field 'maxPriority' is not used [-Wunused-private-field]
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/VoIPServerConfig.cpp:7:
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/VoIPServerConfig.h:13:
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/threading.h:110:8: warning: private field 'maxPriority' is not used [-Wunused-private-field]
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/PacketReassembler.cpp:5:
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/PacketReassembler.h:12:
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/Buffers.h:19:
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/threading.h:110:8: warning: private field 'maxPriority' is not used [-Wunused-private-field]
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/NetworkSocket.cpp:14:
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/os/posix/NetworkSocketPosix.h:11:
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/Buffers.h:19:
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/threading.h:110:8: warning: private field 'maxPriority' is not used [-Wunused-private-field]
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/os/posix/NetworkSocketPosix.cpp:7:
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/os/posix/NetworkSocketPosix.h:11:
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/Buffers.h:19:
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/threading.h:110:8: warning: private field 'maxPriority' is not used [-Wunused-private-field]
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/audio/AudioIO.cpp:19:
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/audio/../os/android/AudioOutputAndroid.h:20:15: warning: 'Start' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/audio/../MediaStreamItf.h:24:15: note: overridden virtual function is here
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/audio/AudioIO.cpp:19:
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/audio/../os/android/AudioOutputAndroid.h:21:15: warning: 'Stop' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/audio/../MediaStreamItf.h:25:15: note: overridden virtual function is here
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/audio/AudioIO.cpp:8:
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/audio/AudioIO.h:11:
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/audio/../os/android/../../audio/AudioInput.h:13:
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/audio/../MediaStreamItf.h:14:
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/audio/../os/android/../../threading.h:110:8: warning: private field 'maxPriority' is not used [-Wunused-private-field]
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/MessageThread.cpp:15:
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/MessageThread.h:8:
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/threading.h:110:8: warning: private field 'maxPriority' is not used [-Wunused-private-field]
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/video/VideoRenderer.cpp:5:
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/video/../os/android/../../video/VideoRenderer.h:9:
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/video/../Buffers.h:19:
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/threading.h:110:8: warning: private field 'maxPriority' is not used [-Wunused-private-field]
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/video/VideoSource.cpp:5:
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/video/../os/android/../../video/VideoSource.h:12:
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/video/../os/android/../../Buffers.h:19:
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/threading.h:110:8: warning: private field 'maxPriority' is not used [-Wunused-private-field]
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/os/android/VideoRendererAndroid.cpp:87:19: warning: moving a temporary object prevents copy elision [-Wpessimizing-move]
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/os/android/VideoRendererAndroid.cpp:87:19: note: remove std::move call here
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/os/android/VideoRendererAndroid.cpp:5:
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/os/android/VideoRendererAndroid.h:8:
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/os/android/../../video/VideoRenderer.h:9:
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/os/android/../../Buffers.h:19:
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/threading.h:110:8: warning: private field 'maxPriority' is not used [-Wunused-private-field]
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/video/ScreamCongestionController.cpp:23:29: warning: unused variable 'BETA_ECN' [-Wunused-const-variable]
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/video/ScreamCongestionController.cpp:7:
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/video/ScreamCongestionController.h:8:
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/Buffers.h:19:
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/threading.h:110:8: warning: private field 'maxPriority' is not used [-Wunused-private-field]
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/os/android/VideoSourceAndroid.cpp:5:
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/os/android/VideoSourceAndroid.h:8:
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/os/android/../../video/VideoSource.h:12:
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/os/android/../../Buffers.h:19:
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/threading.h:110:8: warning: private field 'maxPriority' is not used [-Wunused-private-field]
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/tg_voip_jni.cpp:17:
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/os/android/AudioOutputAndroid.h:20:15: warning: 'Start' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/MediaStreamItf.h:24:15: note: overridden virtual function is here
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/tg_voip_jni.cpp:17:
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/os/android/AudioOutputAndroid.h:21:15: warning: 'Stop' overrides a member function but is not marked 'override' [-Winconsistent-missing-override]
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/MediaStreamItf.h:25:15: note: overridden virtual function is here
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/tg_voip_jni.cpp:22:
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/../c_utils.h:9:9: warning: 'LOGI' macro redefined [-Wmacro-redefined]
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/logging.h:30:9: note: previous definition is here
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/tg_voip_jni.cpp:22:
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/../c_utils.h:10:9: warning: 'LOGD' macro redefined [-Wmacro-redefined]
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/logging.h:29:9: note: previous definition is here
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/tg_voip_jni.cpp:22:
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/../c_utils.h:11:9: warning: 'LOGE' macro redefined [-Wmacro-redefined]
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/logging.h:32:9: note: previous definition is here
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/tg_voip_jni.cpp:22:
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/../c_utils.h:12:9: warning: 'LOGV' macro redefined [-Wmacro-redefined]
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/logging.h:28:9: note: previous definition is here
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/tg_voip_jni.cpp:12:
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/VoIPServerConfig.h:13:
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/os/android/../../threading.h:110:8: warning: private field 'maxPriority' is not used [-Wunused-private-field]
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/VoIPController.cpp:2120:81: warning: format specifies type 'unsigned int' but the argument has type 'std::__ndk1::vector<unsigned int, std::__ndk1::allocator<unsigned int> >::size_type' (aka 'unsigned long') [-Wformat]
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/logging.h:32:74: note: expanded from macro 'LOGE'
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/logging.h:26:24: note: expanded from macro '_LOG_WRAP'
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/VoIPController.cpp:2129:80: warning: format specifies type 'unsigned int' but the argument has type 'std::__ndk1::vector<unsigned int, std::__ndk1::allocator<unsigned int> >::size_type' (aka 'unsigned long') [-Wformat]
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/logging.h:32:74: note: expanded from macro 'LOGE'
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/logging.h:26:24: note: expanded from macro '_LOG_WRAP'
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/VoIPController.cpp:14:
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/VoIPController.h:24:
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/video/VideoSource.h:12:
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/os/android/../../Buffers.h:19:
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/os/android/../../threading.h:110:8: warning: private field 'maxPriority' is not used [-Wunused-private-field]
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/tgcalls/NetworkManager.cpp:182:22: warning: 'set_async_resolver_factory' is deprecated: bugs.webrtc.org/12598 [-Wdeprecated-declarations]
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/webrtc/api/ice_transport_interface.h:70:3: note: 'set_async_resolver_factory' has been explicitly marked deprecated here
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/webrtc/absl/base/attributes.h:674:49: note: expanded from macro 'ABSL_DEPRECATED'
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/tgcalls/VideoCaptureInterfaceImpl.cpp:171:1: warning: field '_platformContext' will be initialized after field '_impl' [-Wreorder]
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/tgcalls/legacy/InstanceImplLegacy.cpp:1:
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/tgcalls/legacy/InstanceImplLegacy.h:6:
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/VoIPController.h:24:
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/video/VideoSource.h:12:
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/Buffers.h:19:
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/threading.h:110:8: warning: private field 'maxPriority' is not used [-Wunused-private-field]
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/tgcalls/group/AudioStreamingPart.cpp:17:10: warning: unused function 'stringToUInt32' [-Wunused-function]
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/tgcalls/group/AudioStreamingPart.cpp:33:26: warning: unused function 'splitString' [-Wunused-function]
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/tgcalls/group/AudioStreamingPart.cpp:57:35: warning: unused function 'parseChannelUpdates' [-Wunused-function]
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/tgcalls/group/GroupNetworkManager.cpp:380:22: warning: 'set_async_resolver_factory' is deprecated: bugs.webrtc.org/12598 [-Wdeprecated-declarations]
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/webrtc/api/ice_transport_interface.h:70:3: note: 'set_async_resolver_factory' has been explicitly marked deprecated here
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/webrtc/absl/base/attributes.h:674:49: note: expanded from macro 'ABSL_DEPRECATED'
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/tgcalls/group/GroupInstanceCustomImpl.cpp:479:10: warning: private field '_countFrames' is not used [-Wunused-private-field]
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/webrtc/common_video/h265/legacy_bit_buffer.cc:36:9: warning: unused function 'HighestByte' [-Wunused-function]
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/webrtc/common_video/h265/legacy_bit_buffer.cc:43:9: warning: unused function 'WritePartialByte' [-Wunused-function]
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/webrtc/sdk/android/src/jni/pc/peer_connection.cc:45:
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/webrtc/sdk/android/generated_peerconnection_jni/PeerConnection_jni.h:1920:17: warning: unused function 'Java_RTCConfiguration_getDisableIpv6' [-Wunused-function]
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/webrtc/sdk/android/src/jni/pc/peer_connection.cc:843:13: warning: unused function 'JNI_PeerConnection_NewGetStatsSender' [-Wunused-function]
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/webrtc/sdk/android/src/jni/pc/peer_connection.cc:856:13: warning: unused function 'JNI_PeerConnection_NewGetStatsReceiver' [-Wunused-function]
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/org_telegram_messenger_voip_Instance.cpp:312:88: warning: adding 'jint' (aka 'int') to a string does not append to the string [-Wstring-plus-int]
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/org_telegram_messenger_voip_Instance.cpp:312:88: note: use array indexing to silence this warning
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/org_telegram_messenger_voip_Instance.cpp:20:
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/tgcalls/legacy/InstanceImplLegacy.h:6:
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/VoIPController.h:24:
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/video/VideoSource.h:12:
+C/C++: In file included from /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/os/android/../../Buffers.h:19:
+C/C++: /home/runner/work/HoldGram/HoldGram/TMessagesProj/jni/voip/libtgvoip/threading.h:110:8: warning: private field 'maxPriority' is not used [-Wunused-private-field]
+
+> Task :TMessagesProj:externalNativeBuildArm64Release
+warn: removing resource com.radolyn.ayugram:string/ActionGroupCallEnded without required default value.
+warn: removing resource com.radolyn.ayugram:string/ActionGroupCallJustStarted without required default value.
+warn: removing resource com.radolyn.ayugram:string/CancelForward without required default value.
+warn: removing resource com.radolyn.ayugram:string/CancelForwardMessage without required default value.
+warn: removing resource com.radolyn.ayugram:string/ClearRecentEmoji without required default value.
+warn: removing resource com.radolyn.ayugram:string/DrawerGhostModeToggle without required default value.
+warn: removing resource com.radolyn.ayugram:string/EnableAds without required default value.
+warn: removing resource com.radolyn.ayugram:string/KeepMediaInfo without required default value.
+warn: removing resource com.radolyn.ayugram:string/PermissionNoAudio without required default value.
+warn: removing resource com.radolyn.ayugram:string/PermissionNoAudioVideo without required default value.
+warn: removing resource com.radolyn.ayugram:string/PermissionNoCamera without required default value.
+warn: removing resource com.radolyn.ayugram:string/PermissionStorage without required default value.
+warn: removing resource com.radolyn.ayugram:string/PrivacyProfilePhotoInfo2 without required default value.
+warn: removing resource com.radolyn.ayugram:string/QRCodePermissionNoCamera without required default value.
+warn: removing resource com.radolyn.ayugram:string/SecretMessageXiaomiFailure without required default value.
+warn: removing resource com.radolyn.ayugram:string/SelectOtherChat without required default value.
+warn: removing resource com.radolyn.ayugram:string/SendOnlinePackets without required default value.
+warn: removing resource com.radolyn.ayugram:string/SendReadPackets without required default value.
+warn: removing resource com.radolyn.ayugram:string/SendUploadProgress without required default value.
+warn: removing resource com.radolyn.ayugram:string/ShowFromChannel without required default value.
+warn: removing resource com.radolyn.ayugram:string/TerminateSessionInfo without required default value.
+warn: removing resource com.radolyn.ayugram:string/UserRestrictionsDisabled without required default value.
+warn: removing resource com.radolyn.ayugram:string/VideoPreviewDesrciption without required default value.
+warn: removing resource com.radolyn.ayugram:string/VoipGroupEndedStartNew without required default value.
+warn: removing resource com.radolyn.ayugram:string/VoipGroupInvitedToVoiceChat without required default value.
+warn: removing resource com.radolyn.ayugram:string/VoipGroupJoinCall without required default value.
+warn: removing resource com.radolyn.ayugram:string/VoipGroupMuteMemberAlertText without required default value.
+warn: removing resource com.radolyn.ayugram:string/VoipGroupStartAs without required default value.
+warn: removing resource com.radolyn.ayugram:string/VoipNeedMicCameraPermission without required default value.
+warn: removing resource com.radolyn.ayugram:string/VoipNeedMicPermission without required default value.
+
+warn: removing resource com.radolyn.ayugram:string/ActionGroupCallEnded without required default value.
+warn: removing resource com.radolyn.ayugram:string/ActionGroupCallJustStarted without required default value.
+warn: removing resource com.radolyn.ayugram:string/CancelForward without required default value.
+warn: removing resource com.radolyn.ayugram:string/CancelForwardMessage without required default value.
+warn: removing resource com.radolyn.ayugram:string/ClearRecentEmoji without required default value.
+warn: removing resource com.radolyn.ayugram:string/DrawerGhostModeToggle without required default value.
+warn: removing resource com.radolyn.ayugram:string/EnableAds without required default value.
+warn: removing resource com.radolyn.ayugram:string/KeepMediaInfo without required default value.
+warn: removing resource com.radolyn.ayugram:string/PermissionNoAudio without required default value.
+warn: removing resource com.radolyn.ayugram:string/PermissionNoAudioVideo without required default value.
+warn: removing resource com.radolyn.ayugram:string/PermissionNoCamera without required default value.
+warn: removing resource com.radolyn.ayugram:string/PermissionStorage without required default value.
+warn: removing resource com.radolyn.ayugram:string/PrivacyProfilePhotoInfo2 without required default value.
+warn: removing resource com.radolyn.ayugram:string/QRCodePermissionNoCamera without required default value.
+warn: removing resource com.radolyn.ayugram:string/SecretMessageXiaomiFailure without required default value.
+warn: removing resource com.radolyn.ayugram:string/SelectOtherChat without required default value.
+warn: removing resource com.radolyn.ayugram:string/SendOnlinePackets without required default value.
+warn: removing resource com.radolyn.ayugram:string/SendReadPackets without required default value.
+warn: removing resource com.radolyn.ayugram:string/SendUploadProgress without required default value.
+warn: removing resource com.radolyn.ayugram:string/ShowFromChannel without required default value.
+warn: removing resource com.radolyn.ayugram:string/TerminateSessionInfo without required default value.
+warn: removing resource com.radolyn.ayugram:string/UserRestrictionsDisabled without required default value.
+warn: removing resource com.radolyn.ayugram:string/VideoPreviewDesrciption without required default value.
+warn: removing resource com.radolyn.ayugram:string/VoipGroupEndedStartNew without required default value.
+warn: removing resource com.radolyn.ayugram:string/VoipGroupInvitedToVoiceChat without required default value.
+warn: removing resource com.radolyn.ayugram:string/VoipGroupJoinCall without required default value.
+warn: removing resource com.radolyn.ayugram:string/VoipGroupMuteMemberAlertText without required default value.
+warn: removing resource com.radolyn.ayugram:string/VoipGroupStartAs without required default value.
+warn: removing resource com.radolyn.ayugram:string/VoipNeedMicCameraPermission without required default value.
+warn: removing resource com.radolyn.ayugram:string/VoipNeedMicPermission without required default value.
+
+> Task :TMessagesProj:bundleArm64ReleaseResources
+> Task :TMessagesProj:mergeArm64ReleaseJniLibFolders FROM-CACHE
+> Task :TMessagesProj:processArm64ReleaseResources
+> Task :TMessagesProj:mergeArm64ReleaseGeneratedProguardFiles
+> Task :TMessagesProj:validateSigningArm64Release
+> Task :TMessagesProj:writeArm64ReleaseAppMetadata
+> Task :TMessagesProj:writeArm64ReleaseSigningConfigVersions
+> Task :TMessagesProj:mergeArm64ReleaseNativeLibs
+> Task :TMessagesProj:stripArm64ReleaseDebugSymbols
+> Task :TMessagesProj:minifyArm64ReleaseWithR8
+> Task :TMessagesProj:l8DexDesugarLibArm64Release FROM-CACHE
+> Task :TMessagesProj:compileArm64ReleaseArtProfile
+> Task :TMessagesProj:uploadCrashlyticsMappingFileArm64Release
+> Task :TMessagesProj:shrinkArm64ReleaseRes
+> Task :TMessagesProj:optimizeArm64ReleaseResources
+> Task :TMessagesProj:packageArm64Release
+> Task :TMessagesProj:createArm64ReleaseApkListingFileRedirect
+> Task :TMessagesProj:assembleArm64Release
+
+BUILD SUCCESSFUL in 11m 56s
+45 actionable tasks: 32 executed, 13 from cache
