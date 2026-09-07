@@ -75,7 +75,7 @@ jobs:
       - name: Build HoldGram APK
         run: |
           set -o pipefail
-          ./gradlew assembleAfatRelease --no-daemon --no-configuration-cache --stacktrace 2>&1 | tee build.log
+          ./gradlew assembleArm64Release --no-daemon --no-configuration-cache --stacktrace 2>&1 | tee build.log
 
       - name: Show Failure Summary
         if: failure()
