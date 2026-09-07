@@ -1078,7 +1078,7 @@ public class LoginActivity extends BaseFragment implements NotificationCenter.No
     private void processLoginSessionUri(Uri uri) {
         if (getParentActivity() == null || uri == null) return;
         AlertDialog progressDialog = new AlertDialog(getParentActivity(), 3);
-        progressDialog.setCanCanceled(false);
+        progressDialog.setCanCancel(false);
         progressDialog.show();
 
         Utilities.globalQueue.postRunnable(() -> {
@@ -1153,7 +1153,7 @@ public class LoginActivity extends BaseFragment implements NotificationCenter.No
             String text = editText.getText().toString().trim();
             if (text.isEmpty()) return;
             AlertDialog progressDialog = new AlertDialog(getParentActivity(), 3);
-            progressDialog.setCanCanceled(false);
+            progressDialog.setCanCancel(false);
             progressDialog.show();
 
             Utilities.globalQueue.postRunnable(() -> {

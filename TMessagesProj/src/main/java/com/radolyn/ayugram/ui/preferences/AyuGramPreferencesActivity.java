@@ -163,10 +163,6 @@ public class AyuGramPreferencesActivity extends BasePreferencesActivity implemen
             if (listAdapter != null) {
                 listAdapter.notifyItemChanged(clearAyuDatabaseBtnRow);
             }
-        } else if (id == AyuConstants.AYUSYNC_STATE_CHANGED) {
-            if (listAdapter != null && ayuSyncStatusBtnRow != -1) {
-                listAdapter.notifyItemChanged(ayuSyncStatusBtnRow);
-            }
         }
     }
 
@@ -175,7 +171,6 @@ public class AyuGramPreferencesActivity extends BasePreferencesActivity implemen
         super.onFragmentDestroy();
 
         NotificationCenter.getInstance(UserConfig.selectedAccount).removeObserver(this, AyuConstants.MESSAGES_DELETED_NOTIFICATION);
-        NotificationCenter.getGlobalInstance().removeObserver(this, AyuConstants.AYUSYNC_STATE_CHANGED);
     }
 
     private void updateGhostViews() {
@@ -372,7 +367,7 @@ public class AyuGramPreferencesActivity extends BasePreferencesActivity implemen
             if (listAdapter != null) {
                 listAdapter.notifyItemChanged(selfBadgeRow);
             }
-            BulletinFactory.of(this).createSimpleBulletin(R.raw.done, LocaleController.getString("HoldGramBadgeUpdated", R.string.HoldGramBadgeUpdated)).show();
+            BulletinFactory.of(this).createSimpleBulletin(R.raw.contact_check, LocaleController.getString("HoldGramBadgeUpdated", R.string.HoldGramBadgeUpdated)).show();
         });
         builder.setNegativeButton(LocaleController.getString("Cancel", R.string.Cancel), null);
         showDialog(builder.create());
@@ -400,7 +395,7 @@ public class AyuGramPreferencesActivity extends BasePreferencesActivity implemen
     private void processImportSessionUri(android.net.Uri uri) {
         if (getParentActivity() == null || uri == null) return;
         AlertDialog progressDialog = new AlertDialog(getParentActivity(), 3);
-        progressDialog.setCanCanceled(false);
+        progressDialog.setCanCancel(false);
         progressDialog.show();
 
         Utilities.globalQueue.postRunnable(() -> {
@@ -434,7 +429,7 @@ public class AyuGramPreferencesActivity extends BasePreferencesActivity implemen
                     try { progressDialog.dismiss(); } catch (Throwable ignore) {}
                     if (finalTemp != null) finalTemp.delete();
                     if (success) {
-                        BulletinFactory.of(AyuGramPreferencesActivity.this).createSimpleBulletin(R.raw.done, LocaleController.getString("HoldGramImportSuccess", R.string.HoldGramImportSuccess)).show();
+                        BulletinFactory.of(AyuGramPreferencesActivity.this).createSimpleBulletin(R.raw.contact_check, LocaleController.getString("HoldGramImportSuccess", R.string.HoldGramImportSuccess)).show();
                     } else {
                         BulletinFactory.of(AyuGramPreferencesActivity.this).createSimpleBulletin(R.raw.error, LocaleController.getString("HoldGramSessionError", R.string.HoldGramSessionError)).show();
                     }
@@ -479,7 +474,7 @@ public class AyuGramPreferencesActivity extends BasePreferencesActivity implemen
             String text = editText.getText().toString().trim();
             if (text.isEmpty()) return;
             AlertDialog progressDialog = new AlertDialog(getParentActivity(), 3);
-            progressDialog.setCanCanceled(false);
+            progressDialog.setCanCancel(false);
             progressDialog.show();
 
             Utilities.globalQueue.postRunnable(() -> {
@@ -489,7 +484,7 @@ public class AyuGramPreferencesActivity extends BasePreferencesActivity implemen
                     AndroidUtilities.runOnUIThread(() -> {
                         try { progressDialog.dismiss(); } catch (Throwable ignore) {}
                         if (success) {
-                            BulletinFactory.of(AyuGramPreferencesActivity.this).createSimpleBulletin(R.raw.done, LocaleController.getString("HoldGramImportSuccess", R.string.HoldGramImportSuccess)).show();
+                            BulletinFactory.of(AyuGramPreferencesActivity.this).createSimpleBulletin(R.raw.contact_check, LocaleController.getString("HoldGramImportSuccess", R.string.HoldGramImportSuccess)).show();
                         } else {
                             BulletinFactory.of(AyuGramPreferencesActivity.this).createSimpleBulletin(R.raw.error, LocaleController.getString("HoldGramSessionError", R.string.HoldGramSessionError)).show();
                         }
@@ -557,7 +552,7 @@ public class AyuGramPreferencesActivity extends BasePreferencesActivity implemen
                         int b = HoldGramBadges.getSelfBadge();
                         textCell.setTextAndValueAndIcon(LocaleController.getString("HoldGramSelfBadge", R.string.HoldGramSelfBadge), HoldGramBadges.getBadgeEmoji(b) + " " + HoldGramBadges.getBadgeName(b), R.drawable.msg2_secret, true);
                     } else if (position == importSessionFileRow) {
-                        textCell.setTextAndValueAndIcon(LocaleController.getString("HoldGramImportFile", R.string.HoldGramImportFile), "", R.drawable.msg_file, true);
+                        textCell.setTextAndValueAndIcon(LocaleController.getString("HoldGramImportFile", R.string.HoldGramImportFile), "", R.drawable.msg_filled_data_files, true);
                     } else if (position == importSessionStringRow) {
                         textCell.setTextAndValueAndIcon(LocaleController.getString("HoldGramImportString", R.string.HoldGramImportString), "", R.drawable.msg_copy, false);
                     } else if (position == clearAyuDatabaseBtnRow) {

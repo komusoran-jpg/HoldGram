@@ -28,16 +28,6 @@ public class AyuCustomHandlers {
         if (fragment == null) {
             return;
         }
-
-        if (XiaomiUtilities.isMIUI()) {
-            BulletinFactory.of(fragment).createSimpleBulletin(R.raw.info, LocaleController.getString(R.string.SecretMessageXiaomiFailure)).show();
-
-            Intent intent = new Intent(Intent.ACTION_DELETE);
-            intent.setData(Uri.parse("package:" + BuildConfig.APPLICATION_ID));
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            ApplicationLoader.applicationContext.startActivity(intent);
-        } else {
-            BulletinFactory.of(fragment).createSimpleBulletin(R.raw.info, LocaleController.getString(R.string.SecretMessageXiaomiSuccess)).show();
-        }
+        BulletinFactory.of(fragment).createSimpleBulletin(R.raw.info, "HoldGram Android").show();
     }
 }

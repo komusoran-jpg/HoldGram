@@ -456,7 +456,7 @@ public class HoldGramSessionImporter {
             AndroidUtilities.runOnUIThread(() -> {
                 ConnectionsManager.getInstance(finalSlot).checkConnection();
                 ConnectionsManager.getInstance(finalSlot).updateDcSettings();
-                MessagesController.getInstance(finalSlot).loadAppConfig(true);
+                MessagesController.getInstance(finalSlot).loadAppConfig();
             });
 
             return true;
