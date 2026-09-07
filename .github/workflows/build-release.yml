@@ -74,7 +74,24 @@ jobs:
 
       - name: Build HoldGram APK
         run: |
-          ./gradlew assembleAfatRelease --no-daemon --stacktrace
+          ./gradlew assembleAfatRelease --no-daemon --no-configuration-cache --stacktrace 2>&1 | tee build.log
+
+      - name: Show Failure Summary
+        if: failure()
+        run: |
+          echo "==================== BUILD FAILED ===================="
+          grep -C 10 -i "error:" build.log || true
+          echo "==================== WHAT WENT WRONG ===================="
+          grep -A 25 -i "What went wrong" build.log || true
+          echo "==================== LAST 100 LINES ===================="
+          tail -n 100 build.log
+
+      - name: Upload Build Log Artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-log
+          path: build.log
 
       - name: Prepare Release Artifacts
         run: |

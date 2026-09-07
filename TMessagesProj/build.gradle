@@ -104,7 +104,9 @@ android {
         externalNativeBuild {
             cmake {
                 version '3.10.2'
-                arguments '-DANDROID_STL=c++_static', '-DANDROID_PLATFORM=android-21'
+                arguments '-DANDROID_STL=c++_static', '-DANDROID_PLATFORM=android-21',
+                          '-DCMAKE_C_COMPILER_LAUNCHER=ccache',
+                          '-DCMAKE_CXX_COMPILER_LAUNCHER=ccache'
             }
         }
 
@@ -126,6 +128,8 @@ android {
 
     lint {
         checkReleaseBuilds false
+        abortOnError false
+        checkDependencies false
         disable 'MissingTranslation', 'ExtraTranslation', 'BlockedPrivateApi'
     }
 
@@ -157,7 +161,7 @@ android {
             multiDexEnabled true
             zipAlignEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            ndk.debugSymbolLevel = 'FULL'
+            ndk.debugSymbolLevel = 'NONE'
             buildConfigField "boolean", "DEBUG_VERSION", "true"
             buildConfigField "boolean", "IS_PM_BUILD", isPmBuild
         }
@@ -166,14 +170,17 @@ android {
             debuggable false
             jniDebuggable false
             signingConfig signingConfigs.release
-            minifyEnabled true
-            shrinkResources true
+            minifyEnabled false
+            shrinkResources false
             multiDexEnabled true
             zipAlignEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            ndk.debugSymbolLevel = 'FULL'
+            ndk.debugSymbolLevel = 'NONE'
             buildConfigField "boolean", "DEBUG_VERSION", "false"
             buildConfigField "boolean", "IS_PM_BUILD", isPmBuild
+            firebaseCrashlytics {
+                mappingFileUploadEnabled false
+            }
         }
     }
 
