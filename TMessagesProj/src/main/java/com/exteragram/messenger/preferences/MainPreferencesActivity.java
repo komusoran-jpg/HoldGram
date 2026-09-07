@@ -201,12 +201,12 @@ public class MainPreferencesActivity extends BasePreferencesActivity {
         otherRow = newRow();
         categoryDividerRow = newRow();
 
-        infoHeaderRow = newRow();
-        channelRow = newRow();
-        groupRow = newRow();
-        crowdinRow = newRow();
-        sourceCodeRow = newRow();
-        infoDividerRow = newRow();
+        infoHeaderRow = -1;
+        channelRow = -1;
+        groupRow = -1;
+        crowdinRow = -1;
+        sourceCodeRow = -1;
+        infoDividerRow = -1;
     }
 
     @Override
@@ -214,14 +214,6 @@ public class MainPreferencesActivity extends BasePreferencesActivity {
         if (position == aboutExteraRow) {
             if (!BuildVars.PM_BUILD)
                 (new UpdaterBottomSheet(getParentActivity(), this, false, null)).show();
-        } else if (position == sourceCodeRow) {
-            Browser.openUrl(getParentActivity(), "https://github.com/AyuGram/AyuGram4A");
-        } else if (position == channelRow) {
-            MessagesController.getInstance(currentAccount).openByUserName(("ayugram1338"), this, 1);
-        } else if (position == groupRow) {
-            MessagesController.getInstance(currentAccount).openByUserName(("ayugramchat"), this, 1);
-        } else if (position == crowdinRow) {
-            Browser.openUrl(getParentActivity(), "https://crowdin.com/project/ayugram");
         } else if (position == appearanceRow) {
             presentFragment(new AppearancePreferencesActivity());
         } else if (position == chatsRow) {
@@ -275,14 +267,6 @@ public class MainPreferencesActivity extends BasePreferencesActivity {
                         textCell.setTextAndIcon(LocaleController.getString("SearchAllChatsShort", R.string.SearchAllChatsShort), R.drawable.msg_discussion, true);
                     } else if (position == otherRow) {
                         textCell.setTextAndIcon(LocaleController.getString("LocalOther", R.string.LocalOther), R.drawable.msg_fave, false);
-                    }else if (position == channelRow) {
-                        textCell.setTextAndValueAndIcon(LocaleController.getString("Channel", R.string.Channel), "@ayugram1338", R.drawable.msg_channel, true);
-                    } else if (position == groupRow) {
-                        textCell.setTextAndValueAndIcon(LocaleController.getString("SearchAllChatsShort", R.string.SearchAllChatsShort), "@ayugramchat", R.drawable.msg_groups, true);
-                    } else if (position == crowdinRow) {
-                        textCell.setTextAndValueAndIcon(LocaleController.getString("Crowdin", R.string.Crowdin), "Crowdin", R.drawable.msg_translate, true);
-                    } else if (position == sourceCodeRow) {
-                        textCell.setTextAndValueAndIcon(LocaleController.getString("SourceCode", R.string.SourceCode), "GitHub", R.drawable.msg_delete, false);
                     }
                     break;
                 case 3:

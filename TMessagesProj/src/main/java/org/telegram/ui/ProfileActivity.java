@@ -7140,7 +7140,7 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
                 }
 
                 settingsSectionRow2 = rowCount++;
-                exteraRow = rowCount++;
+                exteraRow = -1;
                 ayuRow = rowCount++;
                 chatRow = rowCount++;
                 privacyRow = rowCount++;
@@ -9332,10 +9332,8 @@ public class ProfileActivity extends BaseFragment implements NotificationCenter.
                         textCell.setTextAndValueAndIcon(LocaleController.getString("Language", R.string.Language), LocaleController.getCurrentLanguageName(), false, R.drawable.msg2_language, false);
                         if (!ExteraConfig.useSolarIcons)
                             textCell.setImageLeft(23);
-                    } else if (position == exteraRow) {
-                        textCell.setTextAndIcon(LocaleController.getString("Preferences", R.string.Preferences), R.drawable.etg_settings, true);
                     } else if (position == ayuRow) {
-                        textCell.setTextAndIcon(LocaleController.getString("AyuPreferences", R.string.AyuPreferences), R.drawable.msg2_reactions2, true);
+                        textCell.setTextAndIcon(LocaleController.getString("HoldGramPreferences", R.string.HoldGramPreferences), R.drawable.msg2_secret, true);
                     } else if (position == notificationRow) {
                         textCell.setTextAndIcon(LocaleController.getString("NotificationsAndSounds", R.string.NotificationsAndSounds), R.drawable.msg2_notifications, true);
                     } else if (position == privacyRow) {

@@ -119,9 +119,9 @@ public class AyuGramPreferencesActivity extends BasePreferencesActivity implemen
         showKillButtonInDrawerRow = newRow();
         customizationDividerRow = newRow();
 
-        ayuSyncHeaderRow = newRow();
-        ayuSyncStatusBtnRow = newRow();
-        ayuSyncDividerRow = newRow();
+        ayuSyncHeaderRow = -1;
+        ayuSyncStatusBtnRow = -1;
+        ayuSyncDividerRow = -1;
 
         debugHeaderRow = newRow();
         WALModeRow = newRow();
@@ -149,7 +149,7 @@ public class AyuGramPreferencesActivity extends BasePreferencesActivity implemen
                 listAdapter.notifyItemChanged(clearAyuDatabaseBtnRow);
             }
         } else if (id == AyuConstants.AYUSYNC_STATE_CHANGED) {
-            if (listAdapter != null) {
+            if (listAdapter != null && ayuSyncStatusBtnRow != -1) {
                 listAdapter.notifyItemChanged(ayuSyncStatusBtnRow);
             }
         }
@@ -330,7 +330,7 @@ public class AyuGramPreferencesActivity extends BasePreferencesActivity implemen
 
     @Override
     protected String getTitle() {
-        return LocaleController.getString(R.string.AyuPreferences);
+        return "HoldGram";
     }
 
     @Override
